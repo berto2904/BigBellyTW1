@@ -24,6 +24,6 @@ public class ControladorCliente {
 		ModelMap model = new ModelMap();
 		List<Combo> listaCombo = servicioAdmnCombo.listarCombosConStock();
 		model.put("combos", listaCombo);
-		return new ModelAndView("listaCombos", model);
+		return new ModelAndView("lista-combos", model);
 	}
 }
