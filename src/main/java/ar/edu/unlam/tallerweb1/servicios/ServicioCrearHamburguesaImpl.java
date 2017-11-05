@@ -11,6 +11,7 @@ import ar.edu.unlam.tallerweb1.dao.ComboDao;
 import ar.edu.unlam.tallerweb1.dao.IngredienteDao;
 import ar.edu.unlam.tallerweb1.dao.PanDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.modelo.Categoria;
 import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
@@ -64,6 +65,30 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 			ingredienteDao.guardarStockIngrediente(idIngrediente,stockActual);
 		}
 		comboDao.guardarCombo(combo);
+		
+	}
+	@Override
+	public Boolean validarCombo (List<Ingrediente> ingredientes) {
+		Integer CantPan=0;
+		Integer CantCarne=0;
+		Integer CantAderezo=0;
+		
+		for (Ingrediente ingrediente : ingredientes) {
+			Categoria categoriaIngrediente=ingrediente.getCategoria();
+			String nombreCategoriaIngrediente = categoriaIngrediente.getDescripcion();
+			if(nombreCategoriaIngrediente=="pan") {				
+			CantPan=CantPan+1;
+			}
+			
+			if(nombreCategoriaIngrediente=="carne") {				
+				CantCarne=CantCarne+1;
+				}
+			if(nombreCategoriaIngrediente=="aderezo") {				
+				CantAderezo=CantAderezo+1;
+				}
+		}
+				
+		if(CantCarne>=1&&CantAderezo>=1&&CantPan==1) {return true;}else {return false;}
 		
 	}
 	

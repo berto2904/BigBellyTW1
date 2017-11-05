@@ -94,8 +94,12 @@ public class ControladorLogin {
 	
 	@RequestMapping(path = "/agregarCombo", method = RequestMethod.POST)
 	public ModelAndView persistirPan(@ModelAttribute("combo") Combo combo, HttpServletRequest request) {
+		if (servicioCrearHamburguesa.validarCombo(combo.getIngredientes()) ==true) {
 		servicioCrearHamburguesa.guardarCombo(combo.getIngredientes());
-		return new ModelAndView("redirect:/home#creahambur");
+		return new ModelAndView("redirect:/home#creahambur");}
+		else {
+			return new ModelAndView("redirect:/home#HamburguesaError");
+		}
 	}
 	
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.

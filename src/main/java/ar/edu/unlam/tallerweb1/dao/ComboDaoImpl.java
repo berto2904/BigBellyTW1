@@ -25,5 +25,10 @@ public class ComboDaoImpl implements ComboDao {
 		session.saveOrUpdate(combo);
 		
 	}
+
+	@Override
+	public Boolean validarCombo(Combo c1) {
+		return null;
+	}
 	
 }

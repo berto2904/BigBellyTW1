@@ -8,7 +8,7 @@ import ar.edu.unlam.tallerweb1.modelo.Pan;
 public interface ComboDao {
 
 	void guardarCombo(Combo combo);
-	
+	Boolean validarCombo (Combo c1);
 	
 
 }

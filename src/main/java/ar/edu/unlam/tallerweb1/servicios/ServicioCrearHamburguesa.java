@@ -11,5 +11,6 @@ public interface ServicioCrearHamburguesa {
 	List<Ingrediente> listarAderezos();
 	List<Ingrediente> listarVegetales();
 	void guardarCombo(List<Ingrediente> ingredientes);
+	Boolean validarCombo(List<Ingrediente> ingredientes);
 
 }
