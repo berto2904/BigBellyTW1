@@ -31,6 +31,5 @@ public class IngredienteTest {
 		i1.setPrecio((25.00));
 		Assert.assertTrue(i1.getPrecio()>0);
 	}
-	
 
 }

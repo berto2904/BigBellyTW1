@@ -62,5 +62,4 @@ public class Combo {
 		this.ingredientes = ingredientes;
 	}
 	
-	
 }
