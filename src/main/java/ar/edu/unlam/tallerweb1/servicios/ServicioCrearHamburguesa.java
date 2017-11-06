@@ -12,5 +12,7 @@ public interface ServicioCrearHamburguesa {
 	List<Ingrediente> listarVegetales();
 	void guardarCombo(List<Ingrediente> ingredientes);
 	Boolean validarCombo(List<Ingrediente> ingredientes);
+	Double precioCostoCombo(List<Ingrediente> ingredientes);
+	Double precioFinalCombo(Double costoCombo);
 
 }

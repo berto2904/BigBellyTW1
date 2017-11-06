@@ -26,6 +26,9 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 @Service("servicioCrearHamburguesa")
 @Transactional
 public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
+	
+	
+	Double costoCombo=0.0;
 
 	@Inject
 	private IngredienteDao ingredienteDao;
@@ -64,9 +67,9 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 			long stockActual = ingrediente.getStock() - 1 ;
 			ingredienteDao.guardarStockIngrediente(idIngrediente,stockActual);
 		}
-		comboDao.guardarCombo(combo);
-		
+		comboDao.guardarCombo(combo);	
 	}
+	
 	@Override
 	public Boolean validarCombo (List<Ingrediente> ingredientes) {
 		Integer CantPan=0;
@@ -87,9 +90,23 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 				CantAderezo=CantAderezo+1;
 				}
 		}
-				
-		if(CantCarne>=1&&CantAderezo>=1&&CantPan==1) {return true;}else {return false;}
-		
+		if(CantCarne>=1&&CantAderezo>=1&&CantPan==1) {return true;}else {return false;}		
 	}
+	
+	@Override
+	public Double precioCostoCombo(List<Ingrediente> ingredientes) {		
+		for (Ingrediente ingrediente : ingredientes) {
+			Double costoIngrediente = ingrediente.getPrecio();
+			costoCombo=costoCombo+costoIngrediente;			
+		}
+		return costoCombo;
+	}
+	
+	@Override
+	public Double precioFinalCombo(Double costoCombo) {
+		Double finalCombo=costoCombo*30/100;
+		Double precioFinal=costoCombo+finalCombo;
+		return precioFinal;		
+	}	
 	
 }
