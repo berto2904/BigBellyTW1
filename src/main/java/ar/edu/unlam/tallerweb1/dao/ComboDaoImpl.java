@@ -18,6 +18,14 @@ public class ComboDaoImpl implements ComboDao {
 
 	@Inject
     private SessionFactory sessionFactory;
+
+	@Override
+	public Combo consultaComboById(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+		Combo combito = (Combo) session.createCriteria(Combo.class)
+				.add(Restrictions.eq("idCombo", id)).uniqueResult();
+		return combito;
+	}
 	
 	@Override
 	public void guardarCombo(Combo combo) {
@@ -29,6 +37,14 @@ public class ComboDaoImpl implements ComboDao {
 	@Override
 	public Boolean validarCombo(Combo c1) {
 		return null;
+	}
+		
+	@Override
+	public void desactivarCombo(Long id, Boolean estado) {
+		final Session session = sessionFactory.getCurrentSession();
+		Combo combo = consultaComboById(id);
+		combo.setActivo(estado);
+		session.saveOrUpdate(combo);		
 	}
 	
 }

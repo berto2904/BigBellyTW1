@@ -22,6 +22,8 @@ public class Combo {
 	@ManyToMany(mappedBy = "combos")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
+	private Boolean activo;
+	
 	private Double precioFinal;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -30,6 +32,7 @@ public class Combo {
 	
 	@ManyToMany(mappedBy = "combos")
     private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+	//private Ingrediente ingrediente;
 	
 	public Long getIdCombo() {
 		return idCombo;
@@ -58,8 +61,16 @@ public class Combo {
 	public List<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
+	
+	public void setIngredientes(List<Ingrediente> ingrediente) {
+		this.ingredientes = ingrediente;
+	}
+		
+	public Boolean getActivo() {
+		return activo;
+	}
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 	
 }
