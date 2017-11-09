@@ -208,7 +208,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                    <form:form action="/bbtw1/agregarCombo" method="POST" modelAttribute="combo">
 					  <div class="form-group">
 							<label>Pan</label>
-							<form:select path="" cssClass="form-control">
+							<form:select path="" cssClass="form-control" name = "panValue">
 								<form:option value="">Selecciona una opcion</form:option>
 								<c:forEach items="${listaPanes}" var="pan">
 										<form:option value="${pan.idIngrediente}">${pan.nombre}</form:option>
@@ -236,7 +236,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 								</c:forEach>
 							</form:select>
 						</div>
-					  <button type="submit" class="btn btn-success">Guardar</button>
+					  <button class="btn btn-success" id="idGuardar">Guardar</button>
 					</form:form> 
 					
 					
@@ -446,6 +446,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>     
     <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
+    <script type="text/javascript" src="js/home.js" ></script>
 	
 	
 	
