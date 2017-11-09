@@ -1,5 +1,3 @@
-
-
 	$(document).ready(function () {
 		$(document).on("scroll", onScroll);
  
@@ -21,6 +19,8 @@
 				$(document).on("scroll", onScroll);
 			});
 		});
+		
+		
 	});
  
 	function onScroll(event){
