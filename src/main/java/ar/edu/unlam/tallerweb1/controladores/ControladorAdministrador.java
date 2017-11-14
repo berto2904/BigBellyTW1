@@ -49,8 +49,13 @@ public class ControladorAdministrador {
 		servicioAdmnComponentes.guardarPan(p);
 		return new ModelAndView("redirect:/administrador#pan");
 	}
-	@RequestMapping(path = "/eliminarPan", method = RequestMethod.GET)
-	public ModelAndView eliminarPan(@RequestParam("idPan") Long id) {
+//	@RequestMapping(path = "/eliminarPan", method = RequestMethod.GET)
+//	public ModelAndView eliminarPan(@RequestParam("idPan") Long id) {
+//		servicioAdmnComponentes.eliminarPan(id);
+//		return new ModelAndView("redirect:/administrador#pan");
+//	}
+	@RequestMapping(path = "/eliminarPan", method = RequestMethod.POST)
+	public ModelAndView eliminarPan(@RequestParam("pan") Long id) {
 		servicioAdmnComponentes.eliminarPan(id);
 		return new ModelAndView("redirect:/administrador#pan");
 	}

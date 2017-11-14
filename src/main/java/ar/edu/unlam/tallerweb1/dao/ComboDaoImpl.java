@@ -22,7 +22,7 @@ public class ComboDaoImpl implements ComboDao {
 	@Override
 	public void guardarCombo(Combo combo) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(combo);
+		session.persist(combo);
 		
 	}
 

@@ -38,15 +38,15 @@
 		});
 	
        
-        $(function(){
-            $('#portfolio').mixitup({
-                targetSelector: '.item',
-                transitionSpeed: 350
-            });
-        });
+//        $(function(){
+//            $('#portfolio').mixitup({
+//                targetSelector: '.item',
+//                transitionSpeed: 350
+//            });
+//        });
 
-          $(function() {
-            $( "#datepicker" ).datepicker();
-        });
+//          $(function() {
+//            $( "#datepicker" ).datepicker();
+//        });
     
     };

@@ -86,5 +86,10 @@ public class IngredienteDaoImpl implements IngredienteDao {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(ingrediente);
 	}
-	
+	@Override
+	public void persisitIngrediente(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(ingrediente);
+		
+	}
 }

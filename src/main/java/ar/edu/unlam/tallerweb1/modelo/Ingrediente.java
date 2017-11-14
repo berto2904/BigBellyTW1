@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,13 +30,13 @@ public class Ingrediente {
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	private Boolean activo;
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
         name = "combo_ingrediente", 
         joinColumns = { @JoinColumn(name = "idIngrediente") }, 
         inverseJoinColumns = { @JoinColumn(name = "idCombo") }
     )
-    private List<Combo> combos = new ArrayList<>();
+    private Set<Combo> combos = new HashSet<>();
 	
 	public Long getIdIngrediente() {
 		return idIngrediente;
@@ -76,11 +78,11 @@ public class Ingrediente {
 		this.categoria = categoria;
 	}
 
-	public List<Combo> getCombos() {
+	public Set<Combo> getCombos() {
 		return combos;
 	}
 
-	public void setCombos(List<Combo> combos) {
+	public void setCombos(Set<Combo> combos) {
 		this.combos = combos;
 	}
 
