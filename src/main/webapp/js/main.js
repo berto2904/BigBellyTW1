@@ -1,5 +1,3 @@
-
-
 	$(document).ready(function () {
 		$(document).on("scroll", onScroll);
  
@@ -21,6 +19,8 @@
 				$(document).on("scroll", onScroll);
 			});
 		});
+		
+		
 	});
  
 	function onScroll(event){
@@ -38,15 +38,15 @@
 		});
 	
        
-        $(function(){
-            $('#portfolio').mixitup({
-                targetSelector: '.item',
-                transitionSpeed: 350
-            });
-        });
+//        $(function(){
+//            $('#portfolio').mixitup({
+//                targetSelector: '.item',
+//                transitionSpeed: 350
+//            });
+//        });
 
-          $(function() {
-            $( "#datepicker" ).datepicker();
-        });
+//          $(function() {
+//            $( "#datepicker" ).datepicker();
+//        });
     
     };

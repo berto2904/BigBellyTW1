@@ -205,39 +205,37 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                     	<div class="icon-hamburger fa-2x">
 	<!--                    <a href="/bbtw1/home/lista-panes"> Crear</a> -->
 	                    </div>
-                   <form:form action="/bbtw1/agregarCombo" method="POST" modelAttribute="combo">
 					  <div class="form-group">
 							<label>Pan</label>
-							<form:select path="" cssClass="form-control">
-								<form:option value="">Selecciona una opcion</form:option>
+							<select id="idPan" class="form-control">
+								<option value="">Selecciona una opcion</option>
 								<c:forEach items="${listaPanes}" var="pan">
-										<form:option value="${pan.idIngrediente}">${pan.nombre}</form:option>
+										<option value="${pan.idIngrediente}">${pan.nombre}</option>
 								</c:forEach>
-							</form:select>
+							</select>
 							<label>Carne</label>
-							<form:select path="" cssClass="form-control">
-								<form:option value="">Selecciona una opcion</form:option>
+							<select class="form-control" id="idCarne">
+								<option value="">Selecciona una opcion</option>
 								<c:forEach items="${listaCarne}" var="carne">
-										<form:option value="${carne.idIngrediente}">${carne.nombre}</form:option>
+										<option value="${carne.idIngrediente}">${carne.nombre}</option>
 								</c:forEach>
-							</form:select>
-							<label>Aderezo</label>
-							<form:select path="" cssClass="form-control">
-								<form:option value="">Selecciona una opcion</form:option>
+							</select>
+							<label>Aderezos</label>
+							<select class="form-control" id="idAderezos">
+								<option value="">Selecciona una opcion</option>
 								<c:forEach items="${listaAderezos}" var="aderezo">
-										<form:option value="${aderezo.idIngrediente}">${aderezo.nombre}</form:option>
+										<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
 								</c:forEach>
-							</form:select>
+							</select>
 							<label>Vegetales</label>
-							<form:select path="" cssClass="form-control">
-								<form:option value="">Selecciona una opcion</form:option>
-								<c:forEach items="${listaVegetales}" var="vegetale">
-										<form:option value="${aderezo.idIngrediente}">${vegetale.nombre}</form:option>
+							<select class="form-control" id="idVegetales">
+								<option value="">Selecciona una opcion</option>
+								<c:forEach items="${listaVegetales}" var="vegetal">
+										<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
 								</c:forEach>
-							</form:select>
+							</select>
 						</div>
-					  <button type="submit" class="btn btn-success">Guardar</button>
-					</form:form> 
+					  <button class="btn btn-success" id="idGuardar">Guardar</button>
 					
 					
                     <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
@@ -446,6 +444,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>     
     <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
+    <script type="text/javascript" src="js/home.js" ></script>
 	
 	
 	

@@ -1,16 +1,33 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import com.fasterxml.jackson.databind.JsonSerializable;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
@@ -91,17 +108,67 @@ public class ControladorLogin {
 		modelo.put("listaVegetales", listaVegetales);
 		return new ModelAndView("home", modelo);
 	}
-	
-	@RequestMapping(path = "/agregarCombo", method = RequestMethod.POST)
-	public ModelAndView persistirPan(@ModelAttribute("combo") Combo combo, HttpServletRequest request) {
-		if (servicioCrearHamburguesa.validarCombo(combo.getIngredientes()) ==true) {
-		servicioCrearHamburguesa.guardarCombo(combo.getIngredientes());
-		return new ModelAndView("redirect:/home#creahambur");}
-		else {
-			return new ModelAndView("redirect:/home#HamburguesaError");
+	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
+	public ModelAndView crearCombo(
+			@RequestParam("pan") Long idPan,
+			@RequestParam("carne") Long idCarne,
+			@RequestParam("vegetales") Long idVegetal,
+			@RequestParam("aderezo") Long idAderezo,
+			HttpServletRequest request) {
+		
+		Set<Ingrediente> ingredientes = new HashSet<>();
+		ArrayList<Long> idsIngredientes = new ArrayList<Long>();
+		
+		idsIngredientes.add(idPan);
+		idsIngredientes.add(idCarne);
+		idsIngredientes.add(idVegetal);
+		idsIngredientes.add(idAderezo);
+		
+		for (Long id : idsIngredientes) {
+			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
+			ingredientes.add(ingrediente);
 		}
+		servicioCrearHamburguesa.guardarCombo(ingredientes);
+		return new ModelAndView("redirect:/home");
 	}
 	
+	
+//	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
+//	public ModelAndView persistirPan(@RequestParam("pan") Long pan, HttpServletRequest request) {
+//		
+//		return new ModelAndView("redirect:/home");
+//	}
+	
+//	@RequestMapping(path="/consultar-usuario-comic", method=RequestMethod.POST)
+//	public @ResponseBody String validarUsuarioComic(@RequestParam (value="usuario") Long idUsuario, @RequestParam (value="comic") Long idComic){
+//		try{
+//			UsuarioComic usuarioComic = servicioUsuarioComic.consultarUsuarioComic(idUsuario, idComic);
+//
+//			return Boolean.toString(usuarioComic!=null);
+//		}catch(Exception e){
+//			return "false";
+//		}
+//	}
+
+//	@RequestMapping(path = "/agregarCombo", method = RequestMethod.GET)
+//	public ModelAndView eliminarPan(@RequestParam("panValue") Long idPan) {
+//		Combo combo = new Combo();
+//		List<Ingrediente> ingredientes;
+//		
+//		combo.setIngredientes(ingredientes);
+//		if (servicioCrearHamburguesa.validarCombo(combo.getIngredientes()) ==true) {
+//			servicioCrearHamburguesa.guardarCombo(combo.getIngredientes());
+//			return new ModelAndView("redirect:/home#creahambur");}
+//			else {
+//				return new ModelAndView("redirect:/home#HamburguesaError");
+//			}
+//	}
+	
+	private Long Long(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {

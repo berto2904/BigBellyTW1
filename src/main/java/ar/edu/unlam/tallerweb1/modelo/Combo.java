@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,10 +32,19 @@ public class Combo {
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuarioCreador;
 	
-	@ManyToMany(mappedBy = "combos")
-    private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
-	//private Ingrediente ingrediente;
+	@ManyToMany(fetch = FetchType.EAGER ,mappedBy = "combos")
+    private Set<Ingrediente> ingredientes = new HashSet<>();
 	
+	
+	
+	public Combo(Set<Ingrediente> ingredientes) {
+		super();
+		this.ingredientes = ingredientes;
+	}
+	public Combo() {
+		super();
+	}
+
 	public Long getIdCombo() {
 		return idCombo;
 	}
@@ -58,12 +69,11 @@ public class Combo {
 	public void setPrecioFinal(Double precioFinal) {
 		this.precioFinal = precioFinal;
 	}
-	public List<Ingrediente> getIngredientes() {
+	public Set<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
-	
-	public void setIngredientes(List<Ingrediente> ingrediente) {
-		this.ingredientes = ingrediente;
+	public void setIngredientes(Set<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
 	}
 		
 	public Boolean getActivo() {

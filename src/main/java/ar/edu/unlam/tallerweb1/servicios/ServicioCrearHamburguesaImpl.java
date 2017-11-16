@@ -1,6 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -58,16 +61,18 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	
 	@Override
-	public void guardarCombo(List<Ingrediente> ingredientes) {
+	public void guardarCombo(Set<Ingrediente> ingredientes) {
 		Combo combo = new Combo();
-		combo.setIngredientes(ingredientes);
 		combo.setDescripcion("Creado por cliente");
+		
 		for (Ingrediente ingrediente : ingredientes) {
-			Long idIngrediente = ingrediente.getIdIngrediente();
-			long stockActual = ingrediente.getStock() - 1 ;
-			ingredienteDao.guardarStockIngrediente(idIngrediente,stockActual);
+			combo.getIngredientes().add(ingrediente);
+			ingrediente.getCombos().add(combo);
+			Long stockActual = ingrediente.getStock() - 1 ;
+			ingrediente.setStock(stockActual);
+			ingredienteDao.persisitIngrediente(ingrediente);
 		}
-		comboDao.guardarCombo(combo);	
+		comboDao.guardarCombo(combo);
 	}
 	
 	@Override
@@ -109,4 +114,9 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		return precioFinal;		
 	}	
 	
+	@Override
+	public Ingrediente consultarIngredienteById(Long id) {
+		Ingrediente ingrediente = ingredienteDao.consultarIngredienteById(id);
+		return ingrediente;
+	}
 }
