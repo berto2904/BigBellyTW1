@@ -18,7 +18,7 @@ public class EstadoPedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPedido;
+	private Long idEstadoPedido;
 	
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	private Pedido pedido;

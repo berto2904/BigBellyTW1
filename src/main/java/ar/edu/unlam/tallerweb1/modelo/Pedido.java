@@ -38,7 +38,7 @@ public class Pedido {
     private List<Combo> combos = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idPedido")
+	@JoinColumn(name = "idEstadoPedido")
 	private EstadoPedido estado;
 	
     public Long getIdPedido() {
