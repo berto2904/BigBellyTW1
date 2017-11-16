@@ -235,14 +235,35 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 								</c:forEach>
 							</select>
 						</div>
-					  <button class="btn btn-success" id="idGuardar">Guardar</button>
+					  <button class="btn btn-success" id="idGuardar">Crear Combo</button>
 					
 					
                     <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
                 </div>                                
                 <div class="col-md-6">                    
                     <img src="images/ingredientes2.jpg" width="260" alt="Bread">
-				
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Pan</th>
+								<th>Carne</th>
+								<th>Aderezo</th>
+								<th>Vegetales</th>
+								<th>Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+<%-- 							<c:forEach items="${combosDeUsuario}" var="combo"> --%>
+<%-- 								<tr id="idPan_${combo.}"> --%>
+<%-- 									<td><c:out value="${panes.nombre}"/></td> --%>
+<%-- 									<td><c:out value="${panes.stock}"/></td> --%>
+<%-- 									<td><c:out value="${panes.precio}"/></td> --%>
+<%-- 									<td><a class="btn btn-warning btn-sm" onclick="editarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Editar</a></td> --%>
+<%-- 									<td><a class="btn btn-danger btn-sm" onclick="eliminarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Eliminar</a></td> --%>
+								</tr>
+<%-- 							</c:forEach> --%>
+						</tbody> 
+					</table>
                 </div>
             </div>
         </section>

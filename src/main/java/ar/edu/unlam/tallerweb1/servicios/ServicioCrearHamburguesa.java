@@ -3,7 +3,9 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 import java.util.Set;
 
+import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 public interface ServicioCrearHamburguesa {
  
@@ -12,9 +14,10 @@ public interface ServicioCrearHamburguesa {
 	List<Ingrediente> listarCarnes();
 	List<Ingrediente> listarAderezos();
 	List<Ingrediente> listarVegetales();
-	Boolean validarCombo(List<Ingrediente> ingredientes);
-	Double precioCostoCombo(List<Ingrediente> ingredientes);
 	Double precioFinalCombo(Double costoCombo);
-	void guardarCombo(Set<Ingrediente> ingredientes);
+	Combo guardarCombo(Set<Ingrediente> ingredientes, Usuario usuario);
+	List<Combo> listarCombos(Usuario usuario);
+	Boolean validarCombo(Set<Ingrediente> ingredientes);
+	Double precioCostoCombo(Set<Ingrediente> ingredientes);
 
 }

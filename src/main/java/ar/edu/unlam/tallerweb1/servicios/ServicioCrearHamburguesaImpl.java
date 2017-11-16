@@ -39,6 +39,9 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	@Inject
 	private ComboDao comboDao;
 	
+	@Inject
+	private UsuarioDao usuarioDao;
+	
 	@Override
 	public List<Ingrediente> listarPanes() {
 		List<Ingrediente> panes = ingredienteDao.listarPanesActivos();
@@ -61,22 +64,25 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	
 	@Override
-	public void guardarCombo(Set<Ingrediente> ingredientes) {
+	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) {
 		Combo combo = new Combo();
+		combo.setUsuarioCreador(usuario);
+		combo.setActivo(validarCombo(ingredientes));
 		combo.setDescripcion("Creado por cliente");
-		
+		combo.setPrecioFinal(precioFinalCombo(precioCostoCombo(ingredientes)));
 		for (Ingrediente ingrediente : ingredientes) {
 			combo.getIngredientes().add(ingrediente);
+			comboDao.guardarCombo(combo);
 			ingrediente.getCombos().add(combo);
 			Long stockActual = ingrediente.getStock() - 1 ;
 			ingrediente.setStock(stockActual);
 			ingredienteDao.persisitIngrediente(ingrediente);
 		}
-		comboDao.guardarCombo(combo);
+		return combo;
 	}
 	
 	@Override
-	public Boolean validarCombo (List<Ingrediente> ingredientes) {
+	public Boolean validarCombo (Set<Ingrediente> ingredientes) {
 		Integer CantPan=0;
 		Integer CantCarne=0;
 		Integer CantAderezo=0;
@@ -99,7 +105,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	
 	@Override
-	public Double precioCostoCombo(List<Ingrediente> ingredientes) {		
+	public Double precioCostoCombo(Set<Ingrediente> ingredientes) {		
 		for (Ingrediente ingrediente : ingredientes) {
 			Double costoIngrediente = ingrediente.getPrecio();
 			costoCombo=costoCombo+costoIngrediente;			
@@ -118,5 +124,10 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	public Ingrediente consultarIngredienteById(Long id) {
 		Ingrediente ingrediente = ingredienteDao.consultarIngredienteById(id);
 		return ingrediente;
+	}
+	@Override
+	public List<Combo> listarCombos(Usuario usuario) {
+		comboDao.listarCombosByUsuario(usuario);
+		return null;
 	}
 }

@@ -26,7 +26,7 @@ public class Ingrediente {
 	private Double precio;
 	private Long tiempoCoccion;
 	private Long stock;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	private Boolean activo;

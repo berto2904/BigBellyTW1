@@ -23,7 +23,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idRol")
 	private Rol rol;
 	
@@ -32,6 +32,21 @@ public class Usuario {
 	
 	@OneToMany (mappedBy="usuario", cascade=CascadeType.ALL)
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
+
+	
+
+	public Usuario() {
+		super();
+	}
+
+	public Usuario(Long idUsuario, String nombre, String email, String password, Rol rol) {
+		super();
+		this.idUsuario = idUsuario;
+		Nombre = nombre;
+		this.email = email;
+		this.password = password;
+		this.rol = rol;
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -64,7 +79,8 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
 	public Rol getRol() {
 		return rol;
 	}

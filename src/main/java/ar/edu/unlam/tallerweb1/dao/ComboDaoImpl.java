@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Combo;
+import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import java.util.List;
 
@@ -46,5 +48,15 @@ public class ComboDaoImpl implements ComboDao {
 		combo.setActivo(estado);
 		session.saveOrUpdate(combo);		
 	}
-	
+	@Override
+	public List<Combo> listarCombosByUsuario(Usuario usuario) {
+		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Combo> combos = session.createCriteria(Combo.class)
+			.add(Restrictions.eq("activo", true))
+			.createAlias("usuarioCreador", "userCreador")
+			.add(Restrictions.eq("userCreador.idUsuario",usuario.getIdUsuario()))
+			.list();
+		return combos;
+	}
 }

@@ -20,6 +20,16 @@ public class Rol {
 	@OneToMany (mappedBy="rol", cascade=CascadeType.ALL)
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	
+	
+	
+	public Rol() {
+		super();
+	}
+	public Rol(Long id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
 	public Long getId() {
 		return id;
 	}

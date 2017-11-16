@@ -28,7 +28,7 @@ public class Combo {
 	
 	private Double precioFinal;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuarioCreador;
 	
@@ -81,6 +81,12 @@ public class Combo {
 	}
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
+	}
+	public Usuario getUsuarioCreador() {
+		return usuarioCreador;
+	}
+	public void setUsuarioCreador(Usuario usuarioCreador) {
+		this.usuarioCreador = usuarioCreador;
 	}
 	
 }

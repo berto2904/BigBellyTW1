@@ -47,8 +47,6 @@ public class ControladorLogin {
 	
 	@Inject
 	private ServicioCrearHamburguesa servicioCrearHamburguesa;
-	
-	
 
 	public ServicioCrearHamburguesa getServicioCrearHamburguesa() {
 		return servicioCrearHamburguesa;
@@ -83,7 +81,10 @@ public class ControladorLogin {
 		// hace una llamada a otro action a través de la URL correspondiente a ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
+			request.getSession().setAttribute("idUsuario", usuarioBuscado.getIdUsuario());
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+
+			
 			return new ModelAndView("redirect:/home");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
@@ -116,6 +117,8 @@ public class ControladorLogin {
 			@RequestParam("aderezo") Long idAderezo,
 			HttpServletRequest request) {
 		
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		ModelMap modelo = new ModelMap();
 		Set<Ingrediente> ingredientes = new HashSet<>();
 		ArrayList<Long> idsIngredientes = new ArrayList<Long>();
 		
@@ -128,8 +131,11 @@ public class ControladorLogin {
 			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
 			ingredientes.add(ingrediente);
 		}
-		servicioCrearHamburguesa.guardarCombo(ingredientes);
-		return new ModelAndView("redirect:/home");
+		
+		servicioCrearHamburguesa.guardarCombo(ingredientes,usuario);
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		modelo.put("combosDeUsuario", listaCombos);
+		return new ModelAndView("home",modelo);
 	}
 	
 	
@@ -164,10 +170,6 @@ public class ControladorLogin {
 //			}
 //	}
 	
-	private Long Long(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
