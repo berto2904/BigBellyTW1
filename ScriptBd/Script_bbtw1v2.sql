@@ -21,7 +21,7 @@ insert into rol(nombre)
             ("Cocinero");
             
 insert into usuario(nombre,email,password,idRol)
-values      ('pablo','prueba@gmail.com','1234',2);
+values      ('Pablo','prueba@gmail.com','1234',2);
 
 select * from usuario;
 

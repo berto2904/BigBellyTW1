@@ -54,6 +54,7 @@ public class ComboDaoImpl implements ComboDao {
 		final Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Combo> combos = session.createCriteria(Combo.class)
+			.add(Restrictions.eq("activo", true))
 			.createAlias("usuarioCreador", "userCreador")
 			.add(Restrictions.eq("userCreador.idUsuario",usuario.getIdUsuario()))
 			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

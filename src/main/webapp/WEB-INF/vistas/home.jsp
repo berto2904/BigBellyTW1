@@ -8,7 +8,7 @@
 <head>
 <!-- Bootstrap core CSS -->
 
-<link href="css/bootstrap1.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap theme -->
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -208,28 +208,28 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 						  <div class="form-group">
 								<label>Pan</label>
 								<select id="idPan" class="form-control">
-									<option value="">Selecciona una opcion</option>
+									<option value="0">Selecciona una opcion</option>
 									<c:forEach items="${listaPanes}" var="pan">
 											<option value="${pan.idIngrediente}">${pan.nombre}</option>
 									</c:forEach>
 								</select>
 								<label>Carne</label>
 								<select class="form-control" id="idCarne">
-									<option value="">Selecciona una opcion</option>
+									<option value="0">Selecciona una opcion</option>
 									<c:forEach items="${listaCarne}" var="carne">
 											<option value="${carne.idIngrediente}">${carne.nombre}</option>
 									</c:forEach>
 								</select>
 								<label>Aderezos</label>
 								<select class="form-control" id="idAderezos">
-									<option value="">Selecciona una opcion</option>
+									<option value="0">Selecciona una opcion</option>
 									<c:forEach items="${listaAderezos}" var="aderezo">
 											<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
 									</c:forEach>
 								</select>
 								<label>Vegetales</label>
 								<select class="form-control" id="idVegetales">
-									<option value="">Selecciona una opcion</option>
+									<option value="0">Selecciona una opcion</option>
 									<c:forEach items="${listaVegetales}" var="vegetal">
 											<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
 									</c:forEach>
@@ -268,7 +268,8 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 	       			 		</div>
 						</c:forEach>
 						</div>
-						<div class="panel-footer" id="precioPedido"></div>
+						<div class="panel-footer" id="precioPedido">
+						</div>
 					</div>
          		</div>
             </div>

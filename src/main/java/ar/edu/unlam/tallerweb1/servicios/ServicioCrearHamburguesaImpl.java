@@ -87,15 +87,15 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		for (Ingrediente ingrediente : ingredientes) {
 			Categoria categoriaIngrediente=ingrediente.getCategoria();
 			String nombreCategoriaIngrediente = categoriaIngrediente.getDescripcion();
-			if(nombreCategoriaIngrediente=="pan") {				
-			cantPan=cantPan+1;
+			if(nombreCategoriaIngrediente.equals("Pan")) {				
+			cantPan+=1;
 			}
 			
-			if(nombreCategoriaIngrediente=="carne") {				
-				cantCarne=cantCarne+1;
+			if(nombreCategoriaIngrediente.equals("Carne")) {				
+				cantCarne+=1;
 				}
-			if(nombreCategoriaIngrediente=="aderezo") {				
-				cantAderezo=cantAderezo+1;
+			if(nombreCategoriaIngrediente.equals("Aderezo")) {				
+				cantAderezo+=1;
 				}
 		}
 		if(cantCarne>=1 && cantAderezo>=1 &&cantPan==1) {
