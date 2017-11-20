@@ -30,7 +30,8 @@ public class Ingrediente {
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	private Boolean activo;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER)
+//	, cascade = { CascadeType.ALL }
     @JoinTable(
         name = "combo_ingrediente", 
         joinColumns = { @JoinColumn(name = "idIngrediente") }, 

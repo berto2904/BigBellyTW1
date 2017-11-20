@@ -95,18 +95,21 @@ public class ControladorLogin {
 
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
+	public ModelAndView irAHome(HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
 		ModelMap modelo = new ModelMap();
 		Combo combo = new Combo();
 		List<Ingrediente> listaPanes = servicioCrearHamburguesa.listarPanes(); 
 		List<Ingrediente> listaCarnes = servicioCrearHamburguesa.listarCarnes(); 
 		List<Ingrediente> listaAderezos = servicioCrearHamburguesa.listarAderezos();
 		List<Ingrediente> listaVegetales = servicioCrearHamburguesa.listarVegetales();
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
 		modelo.put("combo", combo);
 		modelo.put("listaPanes", listaPanes);
 		modelo.put("listaCarne", listaCarnes);
 		modelo.put("listaAderezos", listaAderezos);
 		modelo.put("listaVegetales", listaVegetales);
+		modelo.put("combosDeUsuario", listaCombos);
 		return new ModelAndView("home", modelo);
 	}
 	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
@@ -126,7 +129,6 @@ public class ControladorLogin {
 		idsIngredientes.add(idCarne);
 		idsIngredientes.add(idVegetal);
 		idsIngredientes.add(idAderezo);
-		
 		for (Long id : idsIngredientes) {
 			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
 			ingredientes.add(ingrediente);
@@ -135,6 +137,7 @@ public class ControladorLogin {
 		servicioCrearHamburguesa.guardarCombo(ingredientes,usuario);
 		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
 		modelo.put("combosDeUsuario", listaCombos);
+
 		return new ModelAndView("home",modelo);
 	}
 	

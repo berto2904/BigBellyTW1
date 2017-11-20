@@ -26,6 +26,12 @@ function crearCombo(){
         },
         success: function(e) {
         	alert("Tu combo se ha creado con exito!!");
+        	$('.combosCreados').html($(e).find('.combosCreados'));
+        	var precioPedido;
+        	for (var i = 0; i < $(e).find('.valorCombo').length; i++) {
+        		precioPedido += Number($('.valorCombo')[i].value);
+			}
+        	$('#precioPedido').html("$"+precioPedido);
         }
 	});
 }

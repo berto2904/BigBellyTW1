@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -90,6 +91,15 @@ public class IngredienteDaoImpl implements IngredienteDao {
 	public void persisitIngrediente(Ingrediente ingrediente) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(ingrediente);
-		
 	}
+	@Override
+	public void persisirListaIngrediente(Set<Ingrediente> ingredientes) {
+		for (Ingrediente ingrediente : ingredientes) {
+			final Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(ingrediente);
+//			session.close();
+//			session.evict(ingrediente);
+		}
+	}
+	
 }

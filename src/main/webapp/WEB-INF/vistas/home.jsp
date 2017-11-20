@@ -199,72 +199,78 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                 <h1>Arma tu propia <span>Hamburguesa</span></h1>
             </div>
             <div class="text-content container">
-             
-                <div class="col-md-6">
-                    <h1>Crea tu propia Hamburguesa</h1>
-                    	<div class="icon-hamburger fa-2x">
-	<!--                    <a href="/bbtw1/home/lista-panes"> Crear</a> -->
-	                    </div>
-					  <div class="form-group">
-							<label>Pan</label>
-							<select id="idPan" class="form-control">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaPanes}" var="pan">
-										<option value="${pan.idIngrediente}">${pan.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Carne</label>
-							<select class="form-control" id="idCarne">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaCarne}" var="carne">
-										<option value="${carne.idIngrediente}">${carne.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Aderezos</label>
-							<select class="form-control" id="idAderezos">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaAderezos}" var="aderezo">
-										<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Vegetales</label>
-							<select class="form-control" id="idVegetales">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaVegetales}" var="vegetal">
-										<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
-								</c:forEach>
-							</select>
-						</div>
-					  <button class="btn btn-success" id="idGuardar">Crear Combo</button>
-					
-					
-                    <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
-                </div>                                
-                <div class="col-md-6">                    
-                    <img src="images/ingredientes2.jpg" width="260" alt="Bread">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Pan</th>
-								<th>Carne</th>
-								<th>Aderezo</th>
-								<th>Vegetales</th>
-								<th>Precio</th>
-							</tr>
-						</thead>
-						<tbody>
-<%-- 							<c:forEach items="${combosDeUsuario}" var="combo"> --%>
-<%-- 								<tr id="idPan_${combo.}"> --%>
-<%-- 									<td><c:out value="${panes.nombre}"/></td> --%>
-<%-- 									<td><c:out value="${panes.stock}"/></td> --%>
-<%-- 									<td><c:out value="${panes.precio}"/></td> --%>
-<%-- 									<td><a class="btn btn-warning btn-sm" onclick="editarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Editar</a></td> --%>
-<%-- 									<td><a class="btn btn-danger btn-sm" onclick="eliminarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Eliminar</a></td> --%>
-								</tr>
-<%-- 							</c:forEach> --%>
-						</tbody> 
-					</table>
+                <div class="row">
+	                <div class="col-md-6">
+	                    <h1>Crea tu propia Hamburguesa</h1>
+	                    	<div class="icon-hamburger fa-2x">
+		<!--                    <a href="/bbtw1/home/lista-panes"> Crear</a> -->
+		                    </div>
+						  <div class="form-group">
+								<label>Pan</label>
+								<select id="idPan" class="form-control">
+									<option value="">Selecciona una opcion</option>
+									<c:forEach items="${listaPanes}" var="pan">
+											<option value="${pan.idIngrediente}">${pan.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Carne</label>
+								<select class="form-control" id="idCarne">
+									<option value="">Selecciona una opcion</option>
+									<c:forEach items="${listaCarne}" var="carne">
+											<option value="${carne.idIngrediente}">${carne.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Aderezos</label>
+								<select class="form-control" id="idAderezos">
+									<option value="">Selecciona una opcion</option>
+									<c:forEach items="${listaAderezos}" var="aderezo">
+											<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Vegetales</label>
+								<select class="form-control" id="idVegetales">
+									<option value="">Selecciona una opcion</option>
+									<c:forEach items="${listaVegetales}" var="vegetal">
+											<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
+									</c:forEach>
+								</select>
+							</div>
+						  <button class="btn btn-success" id="idGuardar">Crear Combo</button>
+	                    <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
+	                </div>                                
+	                <div class="col-md-6">                    
+		                    <img src="images/ingredientes2.jpg" width="260" alt="Bread">
+	                </div>
                 </div>
+                <div class="row">
+                	<div class="panel panel-info combosCreados">
+                		<div class="panel-heading ">Combos Creados</div>
+						<div class="panel-body">
+	               		<c:forEach items="${combosDeUsuario}" var="combo">
+	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+				     			<div class="card">
+				            		<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;">
+				            		<div class="card-body">
+					              		<h4 class="card-title">
+					                		${combo.descripcion}
+					              		</h4>
+				              			<ul class="list-group">
+				              			<c:forEach items="${combo.ingredientes}" var="ingrediente">
+											<li class="list-group-item">${ingrediente.nombre}</li>
+										</c:forEach>    
+										</ul>
+										<span>
+											<h2>$ ${combo.precioFinal}</h2>
+											<input type="hidden" class="valorCombo" value="${combo.precioFinal}"/>
+										</span>
+				            		</div>
+	          					</div>
+	       			 		</div>
+						</c:forEach>
+						</div>
+						<div class="panel-footer" id="precioPedido"></div>
+					</div>
+         		</div>
             </div>
         </section>
         
