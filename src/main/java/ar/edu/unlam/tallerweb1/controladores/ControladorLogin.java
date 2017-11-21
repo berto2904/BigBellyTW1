@@ -35,6 +35,7 @@ import ar.edu.unlam.tallerweb1.modelo.Pan;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCrearHamburguesa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPedido;
 
 @Controller
 public class ControladorLogin {
@@ -48,6 +49,9 @@ public class ControladorLogin {
 	@Inject
 	private ServicioCrearHamburguesa servicioCrearHamburguesa;
 
+	@Inject
+	private ServicioPedido servicioPedido;
+	
 	public ServicioCrearHamburguesa getServicioCrearHamburguesa() {
 		return servicioCrearHamburguesa;
 	}
@@ -140,6 +144,20 @@ public class ControladorLogin {
 
 		return new ModelAndView("home",modelo);
 	}
+	@RequestMapping(path="/crear-pedido-cliente")
+	public ModelAndView crearPedido(HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		ModelMap modelo = new ModelMap();
+		
+		
+		servicioPedido.guardarPedido(usuario);
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		modelo.put("combosDeUsuario", listaCombos);
+		return new ModelAndView("home",modelo);
+		
+	}
+	
+	
 	
 	
 //	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)

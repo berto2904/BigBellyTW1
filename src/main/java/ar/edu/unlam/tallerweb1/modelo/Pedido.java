@@ -2,7 +2,9 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,13 +31,14 @@ public class Pedido {
 	private String descrpicion;
 	private Date fechaHora;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER)
+//	(cascade = { CascadeType.ALL })
     @JoinTable(
         name = "combo_pedido", 
         joinColumns = { @JoinColumn(name = "idPedido") }, 
         inverseJoinColumns = { @JoinColumn(name = "idCombo") }
     )
-    private List<Combo> combos = new ArrayList<>();
+    private Set<Combo> combos = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstadoPedido")
@@ -64,13 +67,20 @@ public class Pedido {
 	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
 	}
-
-	public List<Combo> getCombos() {
+	public Set<Combo> getCombos() {
 		return combos;
 	}
 
-	public void setCombos(List<Combo> combos) {
+	public void setCombos(Set<Combo> combos) {
 		this.combos = combos;
+	}
+
+	public EstadoPedido getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPedido estado) {
+		this.estado = estado;
 	}
 
 	public Usuario getUsuario() {

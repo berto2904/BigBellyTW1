@@ -100,5 +100,9 @@ public class PedidoDaoImpl implements PedidoDao {
 		return pedidos;
 	}
 
-	
+	@Override
+	public void guardarPedido(Pedido pedido) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.persist(pedido);
+	}
 }

@@ -16,6 +16,8 @@ public interface PedidoDao {
 	public List<Pedido> listarPedidosPendCoccion();
 	public List<Pedido> listarPedidosPendEntrega();
 	public List<Pedido> listarPedidosEntregados();
+
+	public void guardarPedido(Pedido pedido);
 	
 
 }

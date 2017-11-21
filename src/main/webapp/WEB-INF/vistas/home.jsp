@@ -244,7 +244,9 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                 </div>
                 <div class="row">
                 	<div class="panel panel-info combosCreados">
-                		<div class="panel-heading ">Combos Creados</div>
+                		<div class="panel-heading ">
+                			<h4>Combos Creados</h4>
+                		</div>
 						<div class="panel-body">
 	               		<c:forEach items="${combosDeUsuario}" var="combo">
 	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
@@ -260,7 +262,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 										</c:forEach>    
 										</ul>
 										<span>
-											<h2>$ ${combo.precioFinal}</h2>
+											<h3>$ ${combo.precioFinal}</h3>
 											<input type="hidden" class="valorCombo" value="${combo.precioFinal}"/>
 										</span>
 				            		</div>

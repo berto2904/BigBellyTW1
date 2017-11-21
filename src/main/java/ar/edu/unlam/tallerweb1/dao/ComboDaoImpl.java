@@ -61,4 +61,12 @@ public class ComboDaoImpl implements ComboDao {
 			.list();
 		return combos;
 	}
+	
+	@Override
+	public void persistirListaCombo(List<Combo> combos) {
+		for (Combo combo : combos) {
+			final Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(combo);
+		}
+	}
 }
