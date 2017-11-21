@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -40,6 +41,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","pan"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return panes;
 	}
@@ -52,6 +54,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","carne"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return carnes;
 	}
@@ -64,6 +67,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","aderezo"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return aderezos;
 	}
@@ -76,6 +80,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","vegetales"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return vegetales;
 	}

@@ -156,41 +156,6 @@ public class ControladorLogin {
 		return new ModelAndView("home",modelo);
 		
 	}
-	
-	
-	
-	
-//	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
-//	public ModelAndView persistirPan(@RequestParam("pan") Long pan, HttpServletRequest request) {
-//		
-//		return new ModelAndView("redirect:/home");
-//	}
-	
-//	@RequestMapping(path="/consultar-usuario-comic", method=RequestMethod.POST)
-//	public @ResponseBody String validarUsuarioComic(@RequestParam (value="usuario") Long idUsuario, @RequestParam (value="comic") Long idComic){
-//		try{
-//			UsuarioComic usuarioComic = servicioUsuarioComic.consultarUsuarioComic(idUsuario, idComic);
-//
-//			return Boolean.toString(usuarioComic!=null);
-//		}catch(Exception e){
-//			return "false";
-//		}
-//	}
-
-//	@RequestMapping(path = "/agregarCombo", method = RequestMethod.GET)
-//	public ModelAndView eliminarPan(@RequestParam("panValue") Long idPan) {
-//		Combo combo = new Combo();
-//		List<Ingrediente> ingredientes;
-//		
-//		combo.setIngredientes(ingredientes);
-//		if (servicioCrearHamburguesa.validarCombo(combo.getIngredientes()) ==true) {
-//			servicioCrearHamburguesa.guardarCombo(combo.getIngredientes());
-//			return new ModelAndView("redirect:/home#creahambur");}
-//			else {
-//				return new ModelAndView("redirect:/home#HamburguesaError");
-//			}
-//	}
-	
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)

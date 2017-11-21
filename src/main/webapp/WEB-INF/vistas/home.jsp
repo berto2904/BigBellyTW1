@@ -274,6 +274,38 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 						</div>
 					</div>
          		</div>
+         		<div class="row">
+                	<div class="panel panel-success pedidosRealizado">
+                		<div class="panel-heading ">
+                			<h4>Pedidos Realizados</h4>
+                		</div>
+						<div class="panel-body">
+<%-- 	               		<c:forEach items="${combosDeUsuario}" var="combo"> --%>
+	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+				     			<div class="card">
+<!-- 				            		<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;"> -->
+				            		<div class="card-body">
+					              		<h4 class="card-title">
+<%-- 					                		${combo.descripcion} --%>
+					              		</h4>
+				              			<ul class="list-group">
+<%-- 				              			<c:forEach items="${combo.ingredientes}" var="ingrediente"> --%>
+<%-- 											<li class="list-group-item">${ingrediente.nombre}</li> --%>
+<%-- 										</c:forEach>     --%>
+										</ul>
+										<span>
+<%-- 											<h3>$ ${combo.precioFinal}</h3> --%>
+<%-- 											<input type="hidden" class="valorCombo" value="${combo.precioFinal}"/> --%>
+										</span>
+				            		</div>
+	          					</div>
+	       			 		</div>
+<%-- 						</c:forEach> --%>
+						</div>
+						<div class="panel-footer" id="pedidosRealizados">
+						</div>
+					</div>
+         		</div>
             </div>
         </section>
         
