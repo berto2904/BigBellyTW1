@@ -33,16 +33,6 @@ function crearCombo(){
 	});
 }
 
-function crearPedido(){
-	$.ajax({
-        url: "/bbtw1/crear-pedido-cliente",
-        type:"POST",
-        success: function(e) {
-        	alert("Tu pedido ha sido realizado");
-        	$('.combosCreados').html($(e).find('.combosCreados'));
-        }
-	});
-}
 
 function sumarCombos(){
 	var precioPedido = 0;
@@ -52,7 +42,47 @@ function sumarCombos(){
 	if (precioPedido != 0) {
 		$('#precioPedido').html('<button class="btn btn-success pull-right btn-md" id="crearPedido">Crear Pedido<span class="glyphicon glyphicon-send" aria-hidden="true"></span></button><h4>Total: $'+precioPedido+'</h4>');
 		$('#crearPedido').on('click',function(){
-			crearPedido();
+//			crearPedido();
+			confirmarPedido();
 		});
 	}
+}
+
+function crearPedido(){
+	$.ajax({
+		url: "/bbtw1/crear-pedido-cliente",
+		type:"POST",
+		success: function(e) {
+			$('.combosCreados').html($(e).find('.combosCreados'));
+		}
+	});
+}
+
+function confirmarPedido(){
+	$.confirm({
+		columnClass: 'xlarge',
+		buttons:{
+			cancelar: function(){
+				location.reload();
+	        },
+			Aceptar: function(){
+				crearPedido();
+				location.reload();
+				
+			},
+		},
+		content: function(){
+	        var self = this;
+	        self.setContent('Checking callback flow');
+	        return $.ajax({
+	            url: '/bbtw1/confirmar-pedido-cliente',
+	            method: 'POST'
+	        }).done(function (response) {
+	            self.setContentAppend(response);
+	        }).fail(function(){
+	            self.setContentAppend('<div>Fail!</div>');
+	        });
+	    }
+	    
+	});
 }

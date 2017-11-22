@@ -144,6 +144,18 @@ public class ControladorLogin {
 
 		return new ModelAndView("home",modelo);
 	}
+	@RequestMapping(path="/confirmar-pedido-cliente")
+	public ModelAndView confirmarPedido(HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		ModelMap modelo = new ModelMap();
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		modelo.put("combosDeUsuario", listaCombos);
+//		servicioPedido.guardarPedido(usuario);
+		return new ModelAndView("confirmarPedido",modelo);
+	}
+		
+		
+		
 	@RequestMapping(path="/crear-pedido-cliente")
 	public ModelAndView crearPedido(HttpServletRequest request) {
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
@@ -156,6 +168,7 @@ public class ControladorLogin {
 		return new ModelAndView("home",modelo);
 		
 	}
+	
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
