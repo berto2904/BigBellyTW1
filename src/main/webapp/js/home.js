@@ -60,6 +60,9 @@ function crearPedido(){
 
 function confirmarPedido(){
 	$.confirm({
+		icon: 'fa fa-spinner fa-spin',
+		type:'dark',
+		title: '',
 		columnClass: 'xlarge',
 		buttons:{
 			cancelar: function(){
@@ -73,7 +76,6 @@ function confirmarPedido(){
 		},
 		content: function(){
 	        var self = this;
-	        self.setContent('Checking callback flow');
 	        return $.ajax({
 	            url: '/bbtw1/confirmar-pedido-cliente',
 	            method: 'POST'
