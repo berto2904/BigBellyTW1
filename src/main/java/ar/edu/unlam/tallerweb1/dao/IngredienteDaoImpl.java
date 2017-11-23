@@ -86,5 +86,39 @@ public class IngredienteDaoImpl implements IngredienteDao {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(ingrediente);
 	}
+
+	@Override
+	public void guardarIngrediente(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(ingrediente);
+		
+	}
+
+	@Override
+	public Ingrediente consultarIngredienteByNombre(String nombreIngrediente) {
+		try {
+			final Session session = sessionFactory.getCurrentSession();
+			Ingrediente ingredientecito = (Ingrediente) session.createCriteria(Ingrediente.class)
+					.add(Restrictions.eq("nombre", nombreIngrediente)).uniqueResult();
+			return ingredientecito;
+		} catch (Exception e) {
+			return null;
+		}
+	}	
+
+	@Override
+	public void eliminarIngrediente(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.delete(ingrediente);		
+	}
+
+	@Override
+	public List<Ingrediente> listarIngrediente() {
+		final Session session = sessionFactory.getCurrentSession();
+
+		@SuppressWarnings("unchecked")
+		List<Ingrediente> ingredientes = session.createCriteria(Ingrediente.class).list();
+		return ingredientes;
+	}
 	
 }

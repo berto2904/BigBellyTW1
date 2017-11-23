@@ -39,6 +39,5 @@ public class Categoria {
 	public void setIngredientes(List<Ingrediente> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
-	
-	
+		
 }

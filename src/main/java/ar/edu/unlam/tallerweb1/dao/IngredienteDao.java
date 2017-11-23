@@ -13,4 +13,8 @@ public interface IngredienteDao {
 	List<Ingrediente> listarAderezosActivos();
 	List<Ingrediente> listarVegetalesActivos();
 	void guardarStockIngrediente(Long idIngrediente, long stockActual);
+	void guardarIngrediente(Ingrediente ingrediente);
+	Ingrediente consultarIngredienteByNombre(String nombre);
+	void eliminarIngrediente(Ingrediente ingrediente);
+	List<Ingrediente> listarIngrediente();
 }

@@ -36,6 +36,17 @@ public class Ingrediente {
     )
     private List<Combo> combos = new ArrayList<>();
 	
+	
+	public Ingrediente(Long idIngrediente, String nombre, Long stock, Double precio) {
+		super();
+		this.idIngrediente = idIngrediente;
+		this.nombre = nombre;
+		this.stock = stock;
+		this.precio = precio;
+	}
+	
+	public Ingrediente() {}
+	
 	public Long getIdIngrediente() {
 		return idIngrediente;
 	}
