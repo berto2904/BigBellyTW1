@@ -65,13 +65,13 @@ function confirmarPedido(){
 		title: '',
 		columnClass: 'xlarge',
 		buttons:{
-			cancelar: function(){
-				location.reload();
-	        },
 			Aceptar: function(){
 				crearPedido();
 				location.reload();
 				
+			},
+			Cancelar: function(){
+				location.reload();
 			},
 		},
 		content: function(){

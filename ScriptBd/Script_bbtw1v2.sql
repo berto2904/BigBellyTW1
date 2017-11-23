@@ -6,6 +6,8 @@ delete from combo;
 select * from categoria;
 select * from combo;
 select * from combo_ingrediente;
+select * from combo_pedido;
+select *from pedido;
 select * from ingrediente ;
 
 insert into categoria(descripcion)
