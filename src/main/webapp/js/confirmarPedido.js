@@ -42,16 +42,21 @@ function initMap() {
 	}
 	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	    directionsService.route({
-	      origin: bigBelly.getPosition(),
-	      destination: marcadorUsuario.getPosition(),
-	      travelMode: 'DRIVING'
+	    	origin: bigBelly.getPosition(),
+	    	destination: marcadorUsuario.getPosition(),
+	    	travelMode: 'DRIVING'
 	    }, function(response, status) {
-	      if (status === 'OK') {
-	        directionsDisplay.setDirections(response);
-	      } else {
-	        window.alert('Directions request failed due to ' + status);
-	      }
+	    	if (status === 'OK') {
+	    		directionsDisplay.setDirections(response);
+	    	} else {
+	    		window.alert('Directions request failed due to ' + status);
+	    	}
 	    });
-	  }
+	    $.getJSON('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+bigBelly.getPosition().toString().replace('(','').replace(')','')+'&destinations='+marcadorUsuario.getPosition().toString().replace('(','').replace(')','')+'&key=AIzaSyBaVN-Mpu4GBrlGhDWqGYdis_ru_yhHUlE', function(data) {
+	        data;
+	    });
+	    
+	}
 
+	console.log('hola');
 }
