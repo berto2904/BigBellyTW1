@@ -38,4 +38,8 @@ insert into ingrediente(nombre, precio, tiempoCoccion, stock, idCategoria,activo
             ("Cebolla",8.00,null,30,4,1),
             ("Pepino",8.00,null,30,4,1),
             ("Lechuga",8.00,null,30,4,1);
-            
+ 
+insert into estadopedido(descripcion)
+    values  ("En proceso de preparacion"),
+    		("En proceso de entrega"),
+    		("Entregado");

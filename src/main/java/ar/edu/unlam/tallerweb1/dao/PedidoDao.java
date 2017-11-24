@@ -8,14 +8,14 @@ public interface PedidoDao {
 	
 	public Pedido consultarPedidoPorId(Long idPedido);
 	
-	public Pedido actualizarEstadoPedidoAPendCoccion(Long idPedido);
-	public Pedido actualizarEstadoPedidoAPendEntrega(Long idPedido);
-	public Pedido actualizarEstadoPedidoAEntregado(Long idPedido);
+	public void actualizarEstadoPedidoAPendEntrega(Long idPedido);
+	public void actualizarEstadoPedidoAEntregado(Long idPedido);
 	
-	public List<Pedido> listarPedidosPendCobro();
-	public List<Pedido> listarPedidosPendCoccion();
-	public List<Pedido> listarPedidosPendEntrega();
+	public List<Pedido> listarPedidosEnProcPreparacion();
+	public List<Pedido> listarPedidosEnProcEntrega();
 	public List<Pedido> listarPedidosEntregados();
+	
+	public List<Pedido> listarPedidosPorFecha(Integer day,Integer month, Integer year);
 	
 
 }

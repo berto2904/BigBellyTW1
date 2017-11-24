@@ -41,7 +41,15 @@ public class Pedido {
 	@JoinColumn(name = "idEstadoPedido")
 	private EstadoPedido estado;
 	
-    public Long getIdPedido() {
+    public EstadoPedido getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPedido estado) {
+		this.estado = estado;
+	}
+
+	public Long getIdPedido() {
 		return idPedido;
 	}
 

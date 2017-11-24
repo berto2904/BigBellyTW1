@@ -24,11 +24,6 @@ public class ServicioPedidoImpl implements ServicioPedido {
 	}
 
 	@Override
-	public void actualizarEstadoPedidoAPendCoccion(Long idPedido) {
-		pedidoDao.actualizarEstadoPedidoAPendCoccion(idPedido);
-	}
-
-	@Override
 	public void actualizarEstadoPedidoAPendEntrega(Long idPedido) {
 		pedidoDao.actualizarEstadoPedidoAPendEntrega(idPedido);
 	}
@@ -39,26 +34,26 @@ public class ServicioPedidoImpl implements ServicioPedido {
 	}
 
 	@Override
-	public List<Pedido> listarPedidosPendCobro() {
-		List<Pedido> pedidos = pedidoDao.listarPedidosPendCobro();
+	public List<Pedido> listarPedidosEnPreparacion() {
+		List<Pedido> pedidos = pedidoDao.listarPedidosEnProcPreparacion();
 		return pedidos;
 	}
 
 	@Override
-	public List<Pedido> listarPedidosPendCoccion() {
-		List<Pedido> pedidos = pedidoDao.listarPedidosPendCoccion();
-		return pedidos;
-	}
-
-	@Override
-	public List<Pedido> listarPedidosPendEntrega() {
-		List<Pedido> pedidos = pedidoDao.listarPedidosPendEntrega();
+	public List<Pedido> listarPedidosEnEntrega() {
+		List<Pedido> pedidos = pedidoDao.listarPedidosEnProcEntrega();
 		return pedidos;
 	}
 
 	@Override
 	public List<Pedido> listarPedidosEntregados() {
 		List<Pedido> pedidos = pedidoDao.listarPedidosEntregados();
+		return pedidos;
+	}
+
+	@Override
+	public List<Pedido> listarPedidosPorFecha(Integer year, Integer month, Integer day) {
+		List<Pedido> pedidos = pedidoDao.listarPedidosPorFecha(year, month, day);
 		return pedidos;
 	}
 
