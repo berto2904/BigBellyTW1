@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
@@ -13,6 +14,7 @@ public interface ComboDao {
 	void desactivarCombo(Long id, Boolean estado);
 	Combo consultaComboById(Long id);
 	List<Combo> listarCombosByUsuario(Usuario usuario);
+	void persistirListaCombo(List<Combo> combos);
 	
 	
 	

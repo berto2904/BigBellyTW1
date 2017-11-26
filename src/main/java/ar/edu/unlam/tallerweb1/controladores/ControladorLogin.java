@@ -32,9 +32,11 @@ import com.google.gson.JsonParser;
 import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
+import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCrearHamburguesa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPedido;
 
 @Controller
 public class ControladorLogin {
@@ -48,6 +50,9 @@ public class ControladorLogin {
 	@Inject
 	private ServicioCrearHamburguesa servicioCrearHamburguesa;
 
+	@Inject
+	private ServicioPedido servicioPedido;
+	
 	public ServicioCrearHamburguesa getServicioCrearHamburguesa() {
 		return servicioCrearHamburguesa;
 	}
@@ -55,7 +60,7 @@ public class ControladorLogin {
 	public void setServicioCrearHamburguesa(ServicioCrearHamburguesa servicioCrearHamburguesa) {
 		this.servicioCrearHamburguesa = servicioCrearHamburguesa;
 	}
-
+ 
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/login")
 	public ModelAndView irALogin() {
@@ -83,9 +88,10 @@ public class ControladorLogin {
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("idUsuario", usuarioBuscado.getIdUsuario());
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-
+			if (usuarioBuscado.getRol().getId() == 2) {
+				return new ModelAndView("redirect:/home");
+			}
 			
-			return new ModelAndView("redirect:/home");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
@@ -95,18 +101,23 @@ public class ControladorLogin {
 
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
+	public ModelAndView irAHome(HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
 		ModelMap modelo = new ModelMap();
 		Combo combo = new Combo();
 		List<Ingrediente> listaPanes = servicioCrearHamburguesa.listarPanes(); 
 		List<Ingrediente> listaCarnes = servicioCrearHamburguesa.listarCarnes(); 
 		List<Ingrediente> listaAderezos = servicioCrearHamburguesa.listarAderezos();
 		List<Ingrediente> listaVegetales = servicioCrearHamburguesa.listarVegetales();
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosByUsuario(usuario);
+		modelo.put("pedidosDeUsuario", listaPedidos);
 		modelo.put("combo", combo);
 		modelo.put("listaPanes", listaPanes);
 		modelo.put("listaCarne", listaCarnes);
 		modelo.put("listaAderezos", listaAderezos);
 		modelo.put("listaVegetales", listaVegetales);
+		modelo.put("combosDeUsuario", listaCombos);
 		return new ModelAndView("home", modelo);
 	}
 	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
@@ -126,7 +137,6 @@ public class ControladorLogin {
 		idsIngredientes.add(idCarne);
 		idsIngredientes.add(idVegetal);
 		idsIngredientes.add(idAderezo);
-		
 		for (Long id : idsIngredientes) {
 			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
 			ingredientes.add(ingrediente);
@@ -135,40 +145,32 @@ public class ControladorLogin {
 		servicioCrearHamburguesa.guardarCombo(ingredientes,usuario);
 		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
 		modelo.put("combosDeUsuario", listaCombos);
+
 		return new ModelAndView("home",modelo);
 	}
-	
-	
-//	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
-//	public ModelAndView persistirPan(@RequestParam("pan") Long pan, HttpServletRequest request) {
-//		
-//		return new ModelAndView("redirect:/home");
-//	}
-	
-//	@RequestMapping(path="/consultar-usuario-comic", method=RequestMethod.POST)
-//	public @ResponseBody String validarUsuarioComic(@RequestParam (value="usuario") Long idUsuario, @RequestParam (value="comic") Long idComic){
-//		try{
-//			UsuarioComic usuarioComic = servicioUsuarioComic.consultarUsuarioComic(idUsuario, idComic);
-//
-//			return Boolean.toString(usuarioComic!=null);
-//		}catch(Exception e){
-//			return "false";
-//		}
-//	}
-
-//	@RequestMapping(path = "/agregarCombo", method = RequestMethod.GET)
-//	public ModelAndView eliminarPan(@RequestParam("panValue") Long idPan) {
-//		Combo combo = new Combo();
-//		List<Ingrediente> ingredientes;
-//		
-//		combo.setIngredientes(ingredientes);
-//		if (servicioCrearHamburguesa.validarCombo(combo.getIngredientes()) ==true) {
-//			servicioCrearHamburguesa.guardarCombo(combo.getIngredientes());
-//			return new ModelAndView("redirect:/home#creahambur");}
-//			else {
-//				return new ModelAndView("redirect:/home#HamburguesaError");
-//			}
-//	}
+	@RequestMapping(path="/confirmar-pedido-cliente")
+	public ModelAndView confirmarPedido(HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		ModelMap modelo = new ModelMap();
+		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		modelo.put("combosDeUsuario", listaCombos);
+//		servicioPedido.guardarPedido(usuario);
+		return new ModelAndView("confirmarPedido",modelo);
+	}
+		
+		
+		
+	@RequestMapping(path="/crear-pedido-cliente")
+	public ModelAndView crearPedido(@RequestParam("direccion") String direccionUsuario,HttpServletRequest request) {
+		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		servicioPedido.guardarPedido(usuario, direccionUsuario);
+		
+		ModelMap modelo = new ModelMap();
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosByUsuario(usuario);
+		modelo.put("pedidosDeUsuario", listaPedidos);
+		return new ModelAndView("home",modelo);
+		
+	}
 	
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.

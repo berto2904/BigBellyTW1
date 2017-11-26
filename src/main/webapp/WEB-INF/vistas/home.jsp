@@ -8,7 +8,7 @@
 <head>
 <!-- Bootstrap core CSS -->
 
-<link href="css/bootstrap1.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap theme -->
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="css/style-portfolio.css">
         <link rel="stylesheet" href="css/picto-foundry-food.css" />
         <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="jquery-confirm-master/dist/jquery-confirm.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link rel="icon" href="favicon-1.ico" type="image/x-icon">
@@ -199,72 +200,109 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                 <h1>Arma tu propia <span>Hamburguesa</span></h1>
             </div>
             <div class="text-content container">
-             
-                <div class="col-md-6">
-                    <h1>Crea tu propia Hamburguesa</h1>
-                    	<div class="icon-hamburger fa-2x">
-	<!--                    <a href="/bbtw1/home/lista-panes"> Crear</a> -->
-	                    </div>
-					  <div class="form-group">
-							<label>Pan</label>
-							<select id="idPan" class="form-control">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaPanes}" var="pan">
-										<option value="${pan.idIngrediente}">${pan.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Carne</label>
-							<select class="form-control" id="idCarne">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaCarne}" var="carne">
-										<option value="${carne.idIngrediente}">${carne.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Aderezos</label>
-							<select class="form-control" id="idAderezos">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaAderezos}" var="aderezo">
-										<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
-								</c:forEach>
-							</select>
-							<label>Vegetales</label>
-							<select class="form-control" id="idVegetales">
-								<option value="">Selecciona una opcion</option>
-								<c:forEach items="${listaVegetales}" var="vegetal">
-										<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
-								</c:forEach>
-							</select>
-						</div>
-					  <button class="btn btn-success" id="idGuardar">Crear Combo</button>
-					
-					
-                    <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
-                </div>                                
-                <div class="col-md-6">                    
-                    <img src="images/ingredientes2.jpg" width="260" alt="Bread">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Pan</th>
-								<th>Carne</th>
-								<th>Aderezo</th>
-								<th>Vegetales</th>
-								<th>Precio</th>
-							</tr>
-						</thead>
-						<tbody>
-<%-- 							<c:forEach items="${combosDeUsuario}" var="combo"> --%>
-<%-- 								<tr id="idPan_${combo.}"> --%>
-<%-- 									<td><c:out value="${panes.nombre}"/></td> --%>
-<%-- 									<td><c:out value="${panes.stock}"/></td> --%>
-<%-- 									<td><c:out value="${panes.precio}"/></td> --%>
-<%-- 									<td><a class="btn btn-warning btn-sm" onclick="editarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Editar</a></td> --%>
-<%-- 									<td><a class="btn btn-danger btn-sm" onclick="eliminarPan(${panes.idPan})" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Eliminar</a></td> --%>
-								</tr>
-<%-- 							</c:forEach> --%>
-						</tbody> 
-					</table>
+                <div class="row">
+	                <div class="col-md-6">
+	                    <h1>Crea tu propia Hamburguesa</h1>
+	                    	<div class="icon-hamburger fa-2x">
+		<!--                    <a href="/bbtw1/home/lista-panes"> Crear</a> -->
+		                    </div>
+						  <div class="form-group">
+								<label>Pan</label>
+								<select id="idPan" class="form-control">
+									<option value="0">Selecciona una opcion</option>
+									<c:forEach items="${listaPanes}" var="pan">
+											<option value="${pan.idIngrediente}">${pan.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Carne</label>
+								<select class="form-control" id="idCarne">
+									<option value="0">Selecciona una opcion</option>
+									<c:forEach items="${listaCarne}" var="carne">
+											<option value="${carne.idIngrediente}">${carne.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Aderezos</label>
+								<select class="form-control" id="idAderezos">
+									<option value="0">Selecciona una opcion</option>
+									<c:forEach items="${listaAderezos}" var="aderezo">
+											<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
+									</c:forEach>
+								</select>
+								<label>Vegetales</label>
+								<select class="form-control" id="idVegetales">
+									<option value="0">Selecciona una opcion</option>
+									<c:forEach items="${listaVegetales}" var="vegetal">
+											<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
+									</c:forEach>
+								</select>
+							</div>
+						  <button class="btn btn-success" id="idGuardar">Crear Combo</button>
+	                    <p class="desc-text">Amamos crear. Y queremos que cada cliente experimente con sus gustos para hacer su menu ideal.</p>
+	                </div>                                
+	                <div class="col-md-6">                    
+		                    <img src="images/ingredientes2.jpg" width="260" alt="Bread">
+	                </div>
                 </div>
+                <div class="row">
+                	<div class="panel panel-success combosCreados">
+                		<div class="panel-heading ">
+                			<h4>Combos Creados</h4>
+                		</div>
+						<div class="panel-body">
+	               		<c:forEach items="${combosDeUsuario}" var="combo">
+	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+				     			<div class="card">
+				            		<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;">
+				            		<div class="card-body">
+					              		<h4 class="card-title">
+					                		${combo.descripcion}
+					              		</h4>
+				              			<ul class="list-group">
+				              			<c:forEach items="${combo.ingredientes}" var="ingrediente">
+											<li class="list-group-item">${ingrediente.nombre}</li>
+										</c:forEach>    
+										</ul>
+										<span>
+											<h3>$ ${combo.precioFinal}</h3>
+											<input type="hidden" class="valorCombo" value="${combo.precioFinal}"/>
+										</span>
+				            		</div>
+	          					</div>
+	       			 		</div>
+						</c:forEach>
+						</div>
+						<div class="panel-footer" id="precioPedido">
+						</div>
+					</div>
+         		</div>
+         		<div class="row">
+                	<div class="panel panel-info pedidosRealizado">
+                		<div class="panel-heading ">
+                			<h4>Pedidos Realizados</h4>
+                		</div>
+						<div class="panel-body">
+	               		<c:forEach items="${pedidosDeUsuario}" var="pedido">
+	               			<div class="col-lg-4 col-md-2 col-sm-6 portfolio-item">
+				     			<div class="card">
+				            		<img class="" src="images/pedidoCombos.png" alt="" style="width: 30%;">
+				            		<div class="card-body">
+					              		<h4 class="card-title">
+					                		Pedido: Nº ${pedido.idPedido}
+					              		</h4>
+				              			<ul class="list-group">
+											<li class="list-group-item">Estado: 
+												<span> ${pedido.estado.getDescrpicion()}</span>
+											</li>
+										</ul>
+				            		</div>
+	          					</div>
+	       			 		</div>
+						</c:forEach>
+						</div>
+						<div class="panel-footer" id="pedidosRealizados">
+						</div>
+					</div>
+         		</div>
             </div>
         </section>
         
@@ -404,7 +442,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 
         <section id="contact">
             <div class="map">
-                <iframe src="https://www.google.com.ar/maps/place/Muu+Lecher%C3%ADa+Ramos+Mej%C3%ADa/@-34.6430811,-58.567174,17z/data=!4m12!1m6!3m5!1s0x95bcc62cc3ef7083:0x8867107f425fade5!2sUniversidad+Nacional+de+La+Matanza!8m2!3d-34.6704143!4d-58.5629288!3m4!1s0x95bcc7ef9714870f:0xf7332eda22c3ab24!8m2!3d-34.6423728!4d-58.5669163" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+<!--                 <iframe src="https://www.google.com.ar/maps/place/Muu+Lecher%C3%ADa+Ramos+Mej%C3%ADa/@-34.6430811,-58.567174,17z/data=!4m12!1m6!3m5!1s0x95bcc62cc3ef7083:0x8867107f425fade5!2sUniversidad+Nacional+de+La+Matanza!8m2!3d-34.6704143!4d-58.5629288!3m4!1s0x95bcc7ef9714870f:0xf7332eda22c3ab24!8m2!3d-34.6423728!4d-58.5669163" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
             </div>
             <div class="container">
                 <div class="row">
@@ -466,17 +504,12 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
     <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
     <script type="text/javascript" src="js/home.js" ></script>
-	
-	
-	
-	
-	
-	
-	
+
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="jquery-confirm-master/dist/jquery-confirm.min.js" type="text/javascript"></script>
 </body>
 </html>

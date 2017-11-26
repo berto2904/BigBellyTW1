@@ -21,8 +21,8 @@ public class Combo {
 	private Long idCombo;
 	private String descripcion;
 	
-	@ManyToMany(mappedBy = "combos")
-    private List<Pedido> pedidos = new ArrayList<Pedido>();
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "combos")
+    private Set<Pedido> pedidos = new HashSet<>();
 	
 	private Boolean activo;
 	
@@ -57,12 +57,6 @@ public class Combo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
 	public Double getPrecioFinal() {
 		return precioFinal;
 	}
@@ -87,6 +81,12 @@ public class Combo {
 	}
 	public void setUsuarioCreador(Usuario usuarioCreador) {
 		this.usuarioCreador = usuarioCreador;
+	}
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 }

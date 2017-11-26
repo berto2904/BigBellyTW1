@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -16,7 +17,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 @Repository("comboDao")
-public class ComboDaoImpl implements ComboDao {
+public class ComboDaoImpl implements ComboDao { 
 
 	@Inject
     private SessionFactory sessionFactory;
@@ -56,7 +57,17 @@ public class ComboDaoImpl implements ComboDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("usuarioCreador", "userCreador")
 			.add(Restrictions.eq("userCreador.idUsuario",usuario.getIdUsuario()))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return combos;
 	}
+	
+	@Override
+	public void persistirListaCombo(List<Combo> combos) {
+		for (Combo combo : combos) {
+			final Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(combo);
+		}
+	}
+	
 }

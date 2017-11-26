@@ -29,9 +29,6 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 @Service("servicioCrearHamburguesa")
 @Transactional
 public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
-	
-	
-	Double costoCombo=0.0;
 
 	@Inject
 	private IngredienteDao ingredienteDao;
@@ -68,44 +65,49 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		Combo combo = new Combo();
 		combo.setUsuarioCreador(usuario);
 		combo.setActivo(validarCombo(ingredientes));
-		combo.setDescripcion("Creado por cliente");
+		combo.setDescripcion("Creado por  "+ usuario.getNombre());
 		combo.setPrecioFinal(precioFinalCombo(precioCostoCombo(ingredientes)));
 		for (Ingrediente ingrediente : ingredientes) {
 			combo.getIngredientes().add(ingrediente);
-			comboDao.guardarCombo(combo);
 			ingrediente.getCombos().add(combo);
 			Long stockActual = ingrediente.getStock() - 1 ;
 			ingrediente.setStock(stockActual);
-			ingredienteDao.persisitIngrediente(ingrediente);
 		}
+		ingredienteDao.persisirListaIngrediente(ingredientes);
+		comboDao.guardarCombo(combo);
 		return combo;
 	}
 	
 	@Override
 	public Boolean validarCombo (Set<Ingrediente> ingredientes) {
-		Integer CantPan=0;
-		Integer CantCarne=0;
-		Integer CantAderezo=0;
+		Integer cantPan=0;
+		Integer cantCarne=0;
+		Integer cantAderezo=0;
 		
 		for (Ingrediente ingrediente : ingredientes) {
 			Categoria categoriaIngrediente=ingrediente.getCategoria();
 			String nombreCategoriaIngrediente = categoriaIngrediente.getDescripcion();
-			if(nombreCategoriaIngrediente=="pan") {				
-			CantPan=CantPan+1;
+			if(nombreCategoriaIngrediente.equals("Pan")) {				
+			cantPan+=1;
 			}
 			
-			if(nombreCategoriaIngrediente=="carne") {				
-				CantCarne=CantCarne+1;
+			if(nombreCategoriaIngrediente.equals("Carne")) {				
+				cantCarne+=1;
 				}
-			if(nombreCategoriaIngrediente=="aderezo") {				
-				CantAderezo=CantAderezo+1;
+			if(nombreCategoriaIngrediente.equals("Aderezo")) {				
+				cantAderezo+=1;
 				}
 		}
-		if(CantCarne>=1&&CantAderezo>=1&&CantPan==1) {return true;}else {return false;}		
+		if(cantCarne>=1 && cantAderezo>=1 &&cantPan==1) {
+			return true;
+			}else {
+				return false;
+				}		
 	}
 	
 	@Override
 	public Double precioCostoCombo(Set<Ingrediente> ingredientes) {		
+		Double costoCombo=0.0;
 		for (Ingrediente ingrediente : ingredientes) {
 			Double costoIngrediente = ingrediente.getPrecio();
 			costoCombo=costoCombo+costoIngrediente;			
@@ -127,7 +129,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	@Override
 	public List<Combo> listarCombos(Usuario usuario) {
-		comboDao.listarCombosByUsuario(usuario);
-		return null;
+		List<Combo> combos = comboDao.listarCombosByUsuario(usuario);
+		return combos;
 	}
 }

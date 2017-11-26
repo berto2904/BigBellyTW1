@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 
@@ -14,4 +15,5 @@ public interface IngredienteDao {
 	List<Ingrediente> listarVegetalesActivos();
 	void guardarStockIngrediente(Long idIngrediente, long stockActual);
 	void persisitIngrediente(Ingrediente ingrediente);
+	void persisirListaIngrediente(Set<Ingrediente> ingredientes);
 }

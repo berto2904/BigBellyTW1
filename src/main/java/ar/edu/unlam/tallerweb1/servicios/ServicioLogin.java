@@ -7,5 +7,6 @@ public interface ServicioLogin {
 
 	Usuario consultarUsuario(Usuario usuario);
 	Usuario consultarUsuarioById(Long idUsuario);
+	void actualizarUsuario(Usuario usuario);
 
 }

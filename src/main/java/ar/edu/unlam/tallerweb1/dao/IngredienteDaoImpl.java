@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -10,6 +11,7 @@ import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -39,6 +41,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","pan"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return panes;
 	}
@@ -51,6 +54,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","carne"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return carnes;
 	}
@@ -63,6 +67,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","aderezo"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return aderezos;
 	}
@@ -75,6 +80,7 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
 			.add(Restrictions.eq("cat.descripcion","vegetales"))
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
 		return vegetales;
 	}
@@ -90,6 +96,15 @@ public class IngredienteDaoImpl implements IngredienteDao {
 	public void persisitIngrediente(Ingrediente ingrediente) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(ingrediente);
-		
 	}
+	@Override
+	public void persisirListaIngrediente(Set<Ingrediente> ingredientes) {
+		for (Ingrediente ingrediente : ingredientes) {
+			final Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(ingrediente);
+//			session.close();
+//			session.evict(ingrediente);
+		}
+	}
+	
 }

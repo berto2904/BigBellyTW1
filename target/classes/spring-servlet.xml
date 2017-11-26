@@ -25,6 +25,7 @@
 		path acá -->
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/administrador/**" location="/administrador/" />
+	<mvc:resources mapping="/jquery-confirm-master/**" location="/jquery-confirm-master/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
 	<mvc:resources mapping="/fonts/**" location="/fonts/" />
