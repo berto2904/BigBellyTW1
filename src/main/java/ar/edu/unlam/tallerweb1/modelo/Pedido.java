@@ -41,6 +41,7 @@ public class Pedido {
 	@JoinColumn(name = "idEstadoPedido")
 	private EstadoPedido estado;
 	private String direccionLocal;
+	private Double precioPedido;
 	
 	public Long getIdPedido() {
 		return idPedido;
@@ -95,6 +96,13 @@ public class Pedido {
 
 	public void setDireccionLocal(String direccionLocal) {
 		this.direccionLocal = direccionLocal;
-	}	
-	
+	}
+
+	public Double getPrecioPedido() {
+		return precioPedido;
+	}
+
+	public void setPrecioPedido(Double precioPedido) {
+		this.precioPedido = precioPedido;
+	}
 }

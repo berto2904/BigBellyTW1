@@ -96,12 +96,15 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		pedido.setUsuario(usuario);
 		pedido.setDireccionLocal(direccionUsuario);
 		pedido.setEstado(estado);
-		List<Combo> combos = comboDao.listarCombosByUsuario(usuario);
+		Double precioFinalPedido = 0.00; 
+		List<Combo> combos = comboDao.listarCombosByUsuarioTrue(usuario);
 		for (Combo combo : combos) {
+			precioFinalPedido += combo.getPrecioFinal();
 			pedido.getCombos().add(combo);
 			combo.setActivo(false);
 			combo.getPedidos().add(pedido);
 		}
+		pedido.setPrecioPedido(precioFinalPedido);
 		comboDao.persistirListaCombo(combos);
 		pedidoDao.guardarPedido(pedido);
 	}

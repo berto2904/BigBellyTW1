@@ -50,7 +50,7 @@ public class ComboDaoImpl implements ComboDao {
 		session.saveOrUpdate(combo);		
 	}
 	@Override
-	public List<Combo> listarCombosByUsuario(Usuario usuario) {
+	public List<Combo> listarCombosByUsuarioTrue(Usuario usuario) {
 		final Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Combo> combos = session.createCriteria(Combo.class)

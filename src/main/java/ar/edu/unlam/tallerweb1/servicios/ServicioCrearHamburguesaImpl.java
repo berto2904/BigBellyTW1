@@ -130,7 +130,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	
 	@Override
 	public List<Combo> listarCombos(Usuario usuario) {
-		List<Combo> combos = comboDao.listarCombosByUsuario(usuario);
+		List<Combo> combos = comboDao.listarCombosByUsuarioTrue(usuario);
 		return combos;
 	}
 	

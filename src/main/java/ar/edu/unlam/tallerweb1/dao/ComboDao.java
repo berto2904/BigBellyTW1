@@ -13,7 +13,7 @@ public interface ComboDao {
 	Boolean validarCombo (Combo c1);
 	void desactivarCombo(Long id, Boolean estado);
 	Combo consultaComboById(Long id);
-	List<Combo> listarCombosByUsuario(Usuario usuario);
+	List<Combo> listarCombosByUsuarioTrue(Usuario usuario);
 	void persistirListaCombo(List<Combo> combos);
 	
 	

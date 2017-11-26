@@ -28,10 +28,10 @@ insert into rol(nombre)
             ("Cocinero");
             
 insert into usuario(nombre,email,password,idRol)
-values      ('Pablo','prueba@gmail.com','1234',2),
-            ('JuanMa','pruebaAdmin@gmail.com','1234',1),
-            ('Cajero','pruebaCajero@gmail.com','1234',3),
-            ('Cocinero','pruebaCocinero@gmail.com','1234',4);
+values  ('JuanMa','admin@gmail.com','1234',1),     
+        ('Pablo','cliente@gmail.com','1234',2),
+        ('Cajero','cajero@gmail.com','1234',3),
+        ('Cocinero','cocinero@gmail.com','1234',4);
 
 select * from estadopedido;
 select * from usuario;

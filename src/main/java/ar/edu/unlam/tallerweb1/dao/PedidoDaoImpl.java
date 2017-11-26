@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -56,6 +57,7 @@ public class PedidoDaoImpl implements PedidoDao {
 		@SuppressWarnings("unchecked")
 		List<Pedido> pedidos = session.createCriteria(Pedido.class)
 				.add(Restrictions.eq("estado", estado))
+				.addOrder(Order.asc("fechaHora"))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 				.list();
 		return pedidos;

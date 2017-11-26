@@ -65,6 +65,8 @@ public class ControladorLogin {
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
 			if (usuarioBuscado.getRol().getId() == 2) {
 				return new ModelAndView("redirect:/home-cliente");
+			}else if (usuarioBuscado.getRol().getId() == 4) {
+				return new ModelAndView("redirect:/home-cocinero");
 			}
 			
 		} else {
