@@ -42,14 +42,6 @@ public class Pedido {
 	private EstadoPedido estado;
 	private String direccionLocal;
 	
-    public EstadoPedido getEstado() {
-		return estado;
-	}
-
-	public void setEstado(EstadoPedido estado) {
-		this.estado = estado;
-	}
-
 	public Long getIdPedido() {
 		return idPedido;
 	}

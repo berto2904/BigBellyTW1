@@ -111,5 +111,9 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		List<Pedido> pedidos = pedidoDao.listarPedidosByUsuario(usuario);
 		return pedidos;
 	}
- 
+	@Override
+	public List<Pedido> listarPedidosPorFecha(Integer year, Integer month, Integer day) {
+		//TODO
+		return null;
+	}
 }

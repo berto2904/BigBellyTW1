@@ -24,7 +24,7 @@ public class ControladorPedido {
 	@RequestMapping(path="/cocinero/lista-pedidos-cocinar")
 	public ModelAndView listaPedidosPendienteCoccion(){
 		ModelMap modelo = new ModelMap();
-		List<Pedido> listaPedidos = servicioPedido.listarPedidosEnPreparacion();
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosPendCoccion();
 		modelo.put("listaPedidosACocinar", listaPedidos);
 		return new ModelAndView("cocinero-pedidos-cocinar", modelo);
 	}
@@ -41,7 +41,7 @@ public class ControladorPedido {
 	@RequestMapping(path="/cajero/lista-pedidos-entregar")
 	public ModelAndView listaPedidosPendienteEntrega(){
 		ModelMap modelo = new ModelMap();
-		List<Pedido> listaPedidos = servicioPedido.listarPedidosEnEntrega();
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosPendEntrega();
 		modelo.put("listaPedidosAEntregar", listaPedidos);
 		return new ModelAndView("cajero-pedidos-entregar", modelo);
 	}

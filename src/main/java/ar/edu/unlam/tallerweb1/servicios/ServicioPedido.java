@@ -17,6 +17,7 @@ public interface ServicioPedido {
 	List<Pedido> listarPedidosPendCoccion();
 	List<Pedido> listarPedidosPendEntrega();
 	List<Pedido> listarPedidosEntregados();
+	public List<Pedido> listarPedidosPorFecha(Integer year, Integer month, Integer day);
 	
 	
 }
