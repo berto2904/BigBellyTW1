@@ -290,11 +290,9 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 					                		Pedido: Nº ${pedido.idPedido}
 					              		</h4>
 				              			<ul class="list-group">
-<%-- 				              			<c:forEach items="${pedido.estado}" var="estado"> --%>
 											<li class="list-group-item">Estado: 
 												<span> ${pedido.estado.getDescrpicion()}</span>
 											</li>
-<%-- 				              			</c:forEach> --%>
 										</ul>
 				            		</div>
 	          					</div>

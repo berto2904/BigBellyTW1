@@ -50,4 +50,14 @@ public class PedidoDaoImpl implements PedidoDao {
 		return pedidos;
 	}
 	
+	@Override
+	public List<Pedido> listarPedidosByEstado(EstadoPedido estado) {
+		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Pedido> pedidos = session.createCriteria(Pedido.class)
+				.add(Restrictions.eq("estado", estado))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
+		return pedidos;
+	}
 }

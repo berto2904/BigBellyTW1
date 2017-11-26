@@ -47,39 +47,43 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		pedidoDao.guardarPedido(pedido);
 	}
 
-//	@Override
-//	public void actualizarEstadoPedidoAPendEntrega(Long idPedido) {
-//		pedidoDao.actualizarEstadoPedidoAPendEntrega(idPedido);
-//	}
-//
-//	@Override
-//	public void actualizarEstadoPedidoAEntregado(Long idPedido) {
-//		pedidoDao.actualizarEstadoPedidoAEntregado(idPedido);
-//	}
-//
-//	@Override
-//	public List<Pedido> listarPedidosPendCobro() {
-//		List<Pedido> pedidos = pedidoDao.listarPedidosPendCobro();
-//		return pedidos;
-//	}
-//
-//	@Override
-//	public List<Pedido> listarPedidosPendCoccion() {
-//		List<Pedido> pedidos = pedidoDao.listarPedidosPendCoccion();
-//		return pedidos;
-//	}
-//
-//	@Override
-//	public List<Pedido> listarPedidosPendEntrega() {
-//		List<Pedido> pedidos = pedidoDao.listarPedidosPendEntrega();
-//		return pedidos;
-//	}
-//
-//	@Override
-//	public List<Pedido> listarPedidosEntregados() {
-//		List<Pedido> pedidos = pedidoDao.listarPedidosEntregados();
-//		return pedidos;
-//	}
+	@Override
+	public void actualizarEstadoPedidoAPendEntrega(Long idPedido) {
+		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 2);
+		Pedido pedido = pedidoDao.consultarPedidoPorId(idPedido);
+		pedido.setEstado(estado);
+		pedidoDao.guardarPedido(pedido);
+	}
+
+	@Override
+	public void actualizarEstadoPedidoAEntregado(Long idPedido) {
+		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 3);
+		Pedido pedido = pedidoDao.consultarPedidoPorId(idPedido);
+		pedido.setEstado(estado);
+		pedidoDao.guardarPedido(pedido);
+	}
+
+	@Override
+	public List<Pedido> listarPedidosPendCoccion() {
+		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 1);
+		List<Pedido> pedidos = pedidoDao.listarPedidosByEstado(estado);
+		return pedidos;
+	}
+
+	@Override
+	public List<Pedido> listarPedidosPendEntrega() {
+		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 2);
+		List<Pedido> pedidos = pedidoDao.listarPedidosByEstado(estado);
+		return pedidos;
+	}
+
+	@Override
+	public List<Pedido> listarPedidosEntregados() {
+		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 3);
+		List<Pedido> pedidos = pedidoDao.listarPedidosByEstado(estado);
+		return pedidos;
+	}
+	
 	@Override
 	public void guardarPedido(Usuario usuario, String direccionUsuario) {
 		EstadoPedido estado = estadoPedidoDao.consultarEstadoPorId((long) 1);
