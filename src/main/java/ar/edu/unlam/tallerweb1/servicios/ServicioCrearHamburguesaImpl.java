@@ -127,9 +127,11 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		Ingrediente ingrediente = ingredienteDao.consultarIngredienteById(id);
 		return ingrediente;
 	}
+	
 	@Override
 	public List<Combo> listarCombos(Usuario usuario) {
 		List<Combo> combos = comboDao.listarCombosByUsuario(usuario);
 		return combos;
 	}
+	
 }
