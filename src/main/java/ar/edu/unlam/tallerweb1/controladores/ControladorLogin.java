@@ -32,6 +32,7 @@ import com.google.gson.JsonParser;
 import ar.edu.unlam.tallerweb1.modelo.Combo;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
+import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCrearHamburguesa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
@@ -59,7 +60,7 @@ public class ControladorLogin {
 	public void setServicioCrearHamburguesa(ServicioCrearHamburguesa servicioCrearHamburguesa) {
 		this.servicioCrearHamburguesa = servicioCrearHamburguesa;
 	}
-
+ 
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/login")
 	public ModelAndView irALogin() {
@@ -87,9 +88,10 @@ public class ControladorLogin {
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("idUsuario", usuarioBuscado.getIdUsuario());
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-
+			if (usuarioBuscado.getRol().getId() == 2) {
+				return new ModelAndView("redirect:/home");
+			}
 			
-			return new ModelAndView("redirect:/home");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
@@ -108,6 +110,8 @@ public class ControladorLogin {
 		List<Ingrediente> listaAderezos = servicioCrearHamburguesa.listarAderezos();
 		List<Ingrediente> listaVegetales = servicioCrearHamburguesa.listarVegetales();
 		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosByUsuario(usuario);
+		modelo.put("pedidosDeUsuario", listaPedidos);
 		modelo.put("combo", combo);
 		modelo.put("listaPanes", listaPanes);
 		modelo.put("listaCarne", listaCarnes);
@@ -157,14 +161,13 @@ public class ControladorLogin {
 		
 		
 	@RequestMapping(path="/crear-pedido-cliente")
-	public ModelAndView crearPedido(HttpServletRequest request) {
+	public ModelAndView crearPedido(@RequestParam("direccion") String direccionUsuario,HttpServletRequest request) {
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+		servicioPedido.guardarPedido(usuario, direccionUsuario);
+		
 		ModelMap modelo = new ModelMap();
-		
-		
-		servicioPedido.guardarPedido(usuario);
-		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
-		modelo.put("combosDeUsuario", listaCombos);
+		List<Pedido> listaPedidos = servicioPedido.listarPedidosByUsuario(usuario);
+		modelo.put("pedidosDeUsuario", listaPedidos);
 		return new ModelAndView("home",modelo);
 		
 	}

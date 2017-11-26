@@ -48,10 +48,13 @@ function sumarCombos(){
 	}
 }
 
-function crearPedido(){
+function crearPedido(direccionUsuario){
 	$.ajax({
 		url: "/bbtw1/crear-pedido-cliente",
 		type:"POST",
+		data: {
+        	direccion:direccionUsuario,
+        },
 		success: function(e) {
 			$('.combosCreados').html($(e).find('.combosCreados'));
 		}
@@ -66,7 +69,11 @@ function confirmarPedido(){
 		columnClass: 'xlarge',
 		buttons:{
 			Aceptar: function(){
-				crearPedido();
+				if ($('#idDistancia')["0"].innerHTML == "") {
+					alert("Selecciona en el mapa para enviarte el pedido");
+					return false;
+				}
+				crearPedido($('#direccionUsuario').val());
 				location.reload();
 				
 			},

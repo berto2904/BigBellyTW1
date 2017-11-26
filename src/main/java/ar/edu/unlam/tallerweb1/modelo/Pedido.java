@@ -1,12 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +25,7 @@ public class Pedido {
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 
-	private String descrpicion;
+	private String descripcion;
 	private Date fechaHora;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -40,9 +37,10 @@ public class Pedido {
     )
     private Set<Combo> combos = new HashSet<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idEstadoPedido")
 	private EstadoPedido estado;
+	private String direccionLocal;
 	
     public Long getIdPedido() {
 		return idPedido;
@@ -51,13 +49,13 @@ public class Pedido {
 	public void setIdPedido(Long idPedido) {
 		this.idPedido = idPedido;
 	}
-
-	public String getDescrpicion() {
-		return descrpicion;
+	
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescrpicion(String descrpicion) {
-		this.descrpicion = descrpicion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Date getFechaHora() {
@@ -89,5 +87,14 @@ public class Pedido {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getDireccionLocal() {
+		return direccionLocal;
+	}
+
+	public void setDireccionLocal(String direccionLocal) {
+		this.direccionLocal = direccionLocal;
 	}	
+	
 }

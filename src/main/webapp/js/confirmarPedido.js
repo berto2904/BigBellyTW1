@@ -1,12 +1,16 @@
+$(document).ready(function(){
+	sumarCombosPedido();
+});
 function initMap() {
 	var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
-	var map = new google.maps.Map(document.getElementById('map'), {
+    var service = new google.maps.DistanceMatrixService();
+//    var d = $.Deferred();
+    var map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: -34.643, lng: -58.565},
 		zoom: 14
 	});
 	directionsDisplay.setMap(map);
-	var infoWindow = new google.maps.InfoWindow({map: map});
 	
 	var bigBellyLatLng = {lat: -34.643, lng: -58.565};
 	var bigBelly = new google.maps.Marker({
@@ -39,6 +43,7 @@ function initMap() {
 			});
 		}
 		console.log("hola");
+		$('#direccionUsuario').val(marcadorUsuario.getPosition());
 	}
 	function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	    directionsService.route({
@@ -52,11 +57,34 @@ function initMap() {
 	    		window.alert('Directions request failed due to ' + status);
 	    	}
 	    });
-	    $.getJSON('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+bigBelly.getPosition().toString().replace('(','').replace(')','')+'&destinations='+marcadorUsuario.getPosition().toString().replace('(','').replace(')','')+'&key=AIzaSyBaVN-Mpu4GBrlGhDWqGYdis_ru_yhHUlE', function(data) {
-	        data;
-	    });
+	    service.getDistanceMatrix(
+	    		{
+	    			origins: [bigBelly.getPosition()],
+	    			destinations: [marcadorUsuario.getPosition()],
+	    			travelMode: 'DRIVING',
+	    			unitSystem: google.maps.UnitSystem.METRIC,
+	    			avoidHighways: false,
+	    			avoidTolls: false,
+	    		}, callback);
+	    
+	    function callback(response, status) {
+	    	$('#idDistancia').html(response.rows["0"].elements["0"].distance.text)
+	    	$('#idTiempo').html(response.rows["0"].elements["0"].duration.text)
+	    	//	    	d.resolve(response);
+//	    	return d.promise();
+	    }
+//	    $.getJSON('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+bigBelly.getPosition().toString().replace('(','').replace(')','')+'&destinations='+marcadorUsuario.getPosition().toString().replace('(','').replace(')','')+'&key=AIzaSyBaVN-Mpu4GBrlGhDWqGYdis_ru_yhHUlE', function(data) {
+//	        data;
+//	    });
 	    
 	}
 
 	console.log('hola');
+}
+function sumarCombosPedido(){
+	var precioPedidoCombos = 0;
+	for (var i = 0; i < $('.valorComboPedido').length; i++) {
+		precioPedidoCombos += Number($('.valorComboPedido')[i].value);
+	}
+	$('#idPrecioPedido').html(precioPedidoCombos);
 }

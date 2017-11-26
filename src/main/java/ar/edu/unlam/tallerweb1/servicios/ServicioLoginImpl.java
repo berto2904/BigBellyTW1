@@ -21,6 +21,9 @@ public class ServicioLoginImpl implements ServicioLogin {
 	@Inject
 	private UsuarioDao servicioLoginDao;
 
+	@Inject
+	private UsuarioDao usuarioDao;
+	
 	@Override
 	public Usuario consultarUsuario (Usuario usuario) {
 		return servicioLoginDao.consultarUsuario(usuario);
@@ -29,5 +32,10 @@ public class ServicioLoginImpl implements ServicioLogin {
 	@Override
 	public Usuario consultarUsuarioById(Long idUsuario) {
 		return servicioLoginDao.consultarUsuarioById(idUsuario);
+	}
+	@Override
+	public void actualizarUsuario(Usuario usuario) {
+		usuarioDao.guardarUsuario(usuario);
+		
 	}
 }

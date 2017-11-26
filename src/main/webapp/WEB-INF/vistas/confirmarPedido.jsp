@@ -46,7 +46,30 @@
 			<h4>¿A donde te lo enviamos?</h4>
 			<div id="map"></div>
 		</div>
-		<div class="col-md-6"></div>
+		<div class="col-md-6">
+			<h4>Combos creados</h4>
+			<ul class="list-group" style="height: 24em; overflow: auto;">
+				<c:forEach items="${combosDeUsuario}" var="combo">
+					<li class="list-group-item list-group-item-success">
+						<span class="icon-hamburger fa-2x"></span>
+						<span class="">${combo.descripcion}</span>
+						<span class="pull-right">$${combo.precioFinal}</span>
+						<input type="hidden" class="valorComboPedido" value="${combo.precioFinal}"/>
+					</li>
+					<br/>
+				</c:forEach>
+			</ul>
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-flag" aria-hidden="true" id="idDistancia"></span>
+			</div>
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-usd" aria-hidden="true" id="idPrecioPedido"></span>
+			</div>
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-time" aria-hidden="true" id="idTiempo"></span>
+			</div>
+		</div>
+		<input id="direccionUsuario" type="hidden" value=""/>
 	</div>
 
 	<footer class="sub_footer">
@@ -65,12 +88,11 @@
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>     
     <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
-    <script type="text/javascript" src="js/confirmarPedido.js" ></script>
-    <script type="text/javascript" src="js/home.js" ></script>
+	<script src="jquery-confirm-master/dist/jquery-confirm.min.js" type="text/javascript"></script>
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="jquery-confirm-master/dist/jquery-confirm.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/confirmarPedido.js" ></script>
 </body>
 </html>

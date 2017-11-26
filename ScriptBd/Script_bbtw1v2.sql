@@ -10,6 +10,11 @@ select * from combo_pedido;
 select *from pedido;
 select * from ingrediente ;
 
+insert into estadopedido(descripcion)
+    values  ("En proceso de preparacion"),
+            ("En proceso de entrega"),
+            ("Entregado");
+            
 insert into categoria(descripcion)
     values  ("Pan"),
             ("Carne"),
@@ -23,8 +28,12 @@ insert into rol(nombre)
             ("Cocinero");
             
 insert into usuario(nombre,email,password,idRol)
-values      ('Pablo','prueba@gmail.com','1234',2);
+values      ('Pablo','prueba@gmail.com','1234',2),
+            ('JuanMa','pruebaAdmin@gmail.com','1234',1),
+            ('Cajero','pruebaCajero@gmail.com','1234',3),
+            ('Cocinero','pruebaCocinero@gmail.com','1234',4);
 
+select * from estadopedido;
 select * from usuario;
 
 insert into ingrediente(nombre, precio, tiempoCoccion, stock, idCategoria,activo)

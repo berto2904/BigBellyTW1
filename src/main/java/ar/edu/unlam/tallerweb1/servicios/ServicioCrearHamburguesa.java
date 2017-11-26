@@ -14,6 +14,7 @@ public interface ServicioCrearHamburguesa {
 	List<Ingrediente> listarCarnes();
 	List<Ingrediente> listarAderezos();
 	List<Ingrediente> listarVegetales();
+	
 	Double precioFinalCombo(Double costoCombo);
 	Combo guardarCombo(Set<Ingrediente> ingredientes, Usuario usuario);
 	List<Combo> listarCombos(Usuario usuario);
