@@ -33,7 +33,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="navbar-header">
-					<span class="navbar-brand">Pedido</span>
+					<span class="navbar-brand">Pedido: Nº ${pedido.getIdPedido()}</span>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -75,6 +75,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="panel panel-success panelesPedido" style="height: 34em;overflow: hidden;">
+				<input type="hidden" id="direccionLocalPedido" value = "${pedido.getDireccionLocal()}"/>
 				<div class="panel-heading ">
 					<h4>Direccion ingresada</h4>
 				</div>
@@ -124,6 +125,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/confirmarPedido.js" ></script>
+    <script type="text/javascript" src="js/visualizarPedido.js" ></script>
 </body>
 </html>
