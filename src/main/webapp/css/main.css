@@ -12,7 +12,11 @@ Text Domain: restaurant
 /*========================
 GLOBAL
 =========================*/
-
+.footerClass{
+	position: fixed;
+    width: 100%;
+    bottom: 0;
+}
 
 h1 {
     font-size: 37px;

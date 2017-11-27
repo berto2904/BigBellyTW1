@@ -1,3 +1,8 @@
+.footerClass{
+	position: fixed;
+    width: 100%;
+    bottom: 0;
+}
 .navactive{
    border-bottom: 1px solid #96E16B;
 }

@@ -93,7 +93,7 @@
 <hr>
 <!-- ============ Footer Section  ============= -->
 	
-	<footer class="sub_footer ">
+	<footer class="sub_footer footerClass">
 	<div class="container">
 		<div class="col-md-4">
 			<p class="sub-footer-text text-center">&copy; BigBelly 2018</p>
