@@ -21,6 +21,8 @@ public class Categoria {
 	@OneToMany (mappedBy="categoria", cascade=CascadeType.ALL)
 	private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 	
+	public Categoria() {}
+	
 	public Long getIdCategoria() {
 		return idCategoria;
 	}

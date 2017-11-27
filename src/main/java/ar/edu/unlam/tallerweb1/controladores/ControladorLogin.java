@@ -87,9 +87,9 @@ public class ControladorLogin {
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("idUsuario", usuarioBuscado.getIdUsuario());
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-
-			
-			return new ModelAndView("redirect:/home");
+            
+			return new ModelAndView("redirect:/administrador");			
+			//return new ModelAndView("redirect:/home");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
