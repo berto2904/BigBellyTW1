@@ -43,7 +43,7 @@ public class Usuario {
 	public Usuario(Long idUsuario, String nombre, String email, String password, Rol rol) {
 		super();
 		this.idUsuario = idUsuario;
-		nombre = nombre;
+		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
 		this.rol = rol;

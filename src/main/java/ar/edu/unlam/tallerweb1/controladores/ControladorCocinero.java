@@ -73,6 +73,12 @@ public class ControladorCocinero {
 		return new ModelAndView("homeCocinero");
 	}
 	
-	
+	@RequestMapping(path = "/visualizar-pedido", method = RequestMethod.GET)
+	public ModelAndView eliminarPan(@RequestParam("pedido") Long idPedido) {
+		ModelMap modelo = new ModelMap();
+		Pedido pedido = servicioPedido.consultarPedidoPorId(idPedido);
+		modelo.put("pedido", pedido);
+		return new ModelAndView("visualizarPedido",modelo);
+	}
 	
 }

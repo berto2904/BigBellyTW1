@@ -112,7 +112,6 @@ public class ControladorCliente {
 		ModelMap modelo = new ModelMap();
 		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
 		modelo.put("combosDeUsuario", listaCombos);
-//		servicioPedido.guardarPedido(usuario);
 		return new ModelAndView("confirmarPedido",modelo);
 	}
 		

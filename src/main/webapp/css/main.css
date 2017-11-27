@@ -12,6 +12,8 @@ Text Domain: restaurant
 /*========================
 GLOBAL
 =========================*/
+
+
 h1 {
     font-size: 37px;
     font-weight: 900;
@@ -166,6 +168,9 @@ h1, h2, p, span, a {
 /*========================
     NAV
 =========================*/
+.panelesPedido{
+	height: 37em !important;
+}
 div#bs-example-navbar-collapse-1 {
     height: 368px;
     overflow: hidden;
