@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Categoria;
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
 
@@ -106,5 +107,80 @@ public class IngredienteDaoImpl implements IngredienteDao {
 //			session.evict(ingrediente);
 		}
 	}
+	@Override
+	public Set<Ingrediente> listarIngredientePersistidos() {
+		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		Set<Ingrediente> ingredientes = (Set<Ingrediente>) session.createCriteria(Ingrediente.class)
+				.list();
+		return ingredientes;
+	}
+
+
+	@Override
+	public List<Ingrediente> listarIngrediente() {
+		final Session session = sessionFactory.getCurrentSession();
+		List<Ingrediente> ingredientes1 = session.createCriteria(Ingrediente.class).list();
+		return ingredientes1;
+	}
+
+	@Override
+	public Ingrediente consultarIngredienteByNombre(String nombreIngrediente) {
+		try {
+			final Session session = sessionFactory.getCurrentSession();
+			Ingrediente ingredientecito = (Ingrediente) session.createCriteria(Ingrediente.class)
+					.add(Restrictions.eq("nombre", nombreIngrediente)).uniqueResult();
+			return ingredientecito;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public void guardarIngrediente(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(ingrediente);
+		
+	}
+
+	@Override
+	public void eliminarIngredienteEnCombo(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.delete(ingrediente);		
+	}
+
+	@Override
+	public void guardarIngredienteEnCombo(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(ingrediente); 
+		
+	}
+
+	@Override
+	public void persisirListaIngredienteAdmin(Set<Ingrediente> listaIngredientes) {
+		for (Ingrediente ingrediente : listaIngredientes) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(ingrediente);
+		
+	} 	
+	
+}
+
+	@Override
+	public void eliminarIngrediente(Ingrediente ingrediente) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.delete(ingrediente);
+		
+	}
+    //NUEVO
+	@Override
+	public List<Categoria> listarCategoria() {
+		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Categoria> categorias = session.createCriteria(Categoria.class)			
+			.list();
+		return categorias;
+	}
+	
 	
 }

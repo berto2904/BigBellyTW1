@@ -67,8 +67,9 @@ public class ControladorLogin {
 				return new ModelAndView("redirect:/home-cliente");
 			}else if (usuarioBuscado.getRol().getId() == 4) {
 				return new ModelAndView("redirect:/home-cocinero");
+			}else if(usuarioBuscado.getRol().getId() == 1) {
+				return new ModelAndView("redirect:/administrador");			
 			}
-			
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}

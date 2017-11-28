@@ -1,14 +1,17 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import ar.edu.unlam.tallerweb1.dao.IngredienteDao;
 import ar.edu.unlam.tallerweb1.dao.PanDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.modelo.Categoria;
+import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 import ar.edu.unlam.tallerweb1.modelo.Pan;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
@@ -24,6 +27,9 @@ public class ServicioAdministrarComponentesImpl implements ServicioAdministrarCo
 
 	@Inject
 	private PanDao panDao;
+	
+	@Inject
+	private IngredienteDao ingredienteDao;
 	
 //-----------------Pan----------------//
 	@Override
@@ -51,6 +57,43 @@ public class ServicioAdministrarComponentesImpl implements ServicioAdministrarCo
 		Pan pan = panDao.consultarPanById(idPan);
 		panDao.eliminarPan(pan);
 		return pan;
+	}
+	
+	//TODO
+	@Override
+	public List<Ingrediente> listarIngredientes() {
+		List<Ingrediente> ingredientes = ingredienteDao.listarIngrediente();
+		return ingredientes;
+	}
+	
+	@Override
+	public List<Categoria> listarcategorias() {
+		List<Categoria> categoria = ingredienteDao.listarCategoria();
+		return categoria;
+	}
+		
+	
+	@Override
+	public Ingrediente guardarIngrediente(Ingrediente ingrediente) {
+		Ingrediente ingrediente1 = ingredienteDao.consultarIngredienteByNombre(ingrediente.getNombre());
+		try {
+			ingrediente.setPrecio(ingrediente.getPrecio());
+			ingrediente.setStock(ingrediente.getStock());
+			if(ingrediente.getStock()>0) {ingrediente.setActivo(true);}else{ingrediente.setActivo(false);}
+			ingrediente.setCategoria(ingrediente.getCategoria());
+			ingredienteDao.guardarIngrediente(ingrediente);
+			return ingrediente;
+			
+		} catch (Exception e) {
+			ingredienteDao.guardarIngrediente(ingrediente);
+			return ingrediente;
+		}
+	}
+	@Override
+	public Ingrediente eliminarIngrediente(Long idIngrediente) {
+		Ingrediente ingrediente = ingredienteDao.consultarIngredienteById(idIngrediente);
+		ingredienteDao.eliminarIngrediente(ingrediente);
+		return ingrediente;
 	}
 	
 }

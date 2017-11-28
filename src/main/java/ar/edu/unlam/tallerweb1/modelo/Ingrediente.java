@@ -39,6 +39,16 @@ public class Ingrediente {
     )
     private Set<Combo> combos = new HashSet<>();
 	
+	public Ingrediente(Long idIngrediente, String nombre, Long stock, Double precio, Categoria categoria) {
+		this.idIngrediente=idIngrediente;
+		this.nombre=nombre;
+		this.stock=stock;
+		this.precio=precio;
+		this.categoria=categoria;
+	}
+
+	public Ingrediente() {}
+
 	public Long getIdIngrediente() {
 		return idIngrediente;
 	}
@@ -72,9 +82,11 @@ public class Ingrediente {
 	}
 
 	public Categoria getCategoria() {
+		//Categoria cat = new Categoria();
 		return categoria;
 	}
 
+	
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
@@ -101,7 +113,6 @@ public class Ingrediente {
 
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
-	}
-	
+	}	
 	
 }

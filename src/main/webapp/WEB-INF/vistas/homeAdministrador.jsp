@@ -38,19 +38,22 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav main-nav  clear navbar-right ">
-                            <li><a class="navactive color_animation" href="#pan">PAN</a></li>
+                            <li><a class="navactive color_animation" href="#ingrediente">ABM Ingredientes</a></li>
+                            <li><a class="navactive color_animation" href="#combos">ABM Combos</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
         
-        <%@include file='../../administrador/inlcudes/administracionPan.jsp' %>
-<%--         <%@include file='../../administrador/inlcudes/administracionCarne.jsp' %> --%>
+        
+        
+        <%@include file='../../administrador/inlcudes/administracionIngrediente.jsp' %>
+        <%@include file='../../administrador/inlcudes/administracionCombo.jsp' %>
 
         <footer class="sub_footer ">
             <div class="container">
-                <div class="col-md-4"><p class="sub-footer-text text-center">&copy; BigBelly 2018</p></div>
+                <div class="col-md-4"><p class="sub-footer-text text-center">&copy; BigBelly 2017</p></div>
             </div>
         </footer>
         

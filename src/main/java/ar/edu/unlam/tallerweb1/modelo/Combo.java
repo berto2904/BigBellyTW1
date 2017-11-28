@@ -44,6 +44,12 @@ public class Combo {
 	public Combo() {
 		super();
 	}
+	
+	public Combo(Long idCombo, String descripcion, Double precioFinal) 
+	{this.idCombo=idCombo;
+   	 this.descripcion=descripcion;
+   	 this.precioFinal=precioFinal;
+	 }
 
 	public Long getIdCombo() {
 		return idCombo;

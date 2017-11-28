@@ -133,5 +133,59 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		List<Combo> combos = comboDao.listarCombosByUsuarioTrue(usuario);
 		return combos;
 	}
+
+	@Override
+	public void eliminarComboAdmin(Long id) {
+		
+		
+	}
+	//NUEVO
+	@Override
+	public Combo guardarComboAdmin(Set<Ingrediente> listaIngredientes, Usuario usuario) {
+		Combo combo = new Combo();
+		combo.setUsuarioCreador(usuario);
+		combo.setActivo(validarComboAdmin(listaIngredientes));
+		combo.setDescripcion("Creado por  "+ usuario.getNombre());
+		combo.setPrecioFinal(precioFinalCombo(precioCostoCombo(listaIngredientes)));
+		for (Ingrediente ingrediente : listaIngredientes) {
+			combo.getIngredientes().add(ingrediente);
+			ingrediente.getCombos().add(combo);
+			Long stockActual = ingrediente.getStock() - 1 ;
+			ingrediente.setStock(stockActual);
+		}
+		ingredienteDao.persisirListaIngredienteAdmin(listaIngredientes);
+		comboDao.guardarCombo(combo);
+		return combo;
+	}
 	
+	//NUEVO
+	@Override
+	public Boolean validarComboAdmin(Set<Ingrediente> listaIngredientes) {
+		Integer cantPan=0;
+		Integer cantCarne=0;
+		Integer cantAderezo=0;
+		
+		for (Ingrediente ingrediente : listaIngredientes) {
+			Categoria categoriaIngrediente=ingrediente.getCategoria();
+			String nombreCategoriaIngrediente = categoriaIngrediente.getDescripcion();
+			if(nombreCategoriaIngrediente.equals("Pan")) {				
+			cantPan+=1;
+			}
+			
+			if(nombreCategoriaIngrediente.equals("Carne")) {				
+				cantCarne+=1;
+				}
+			if(nombreCategoriaIngrediente.equals("Aderezo")) {				
+				cantAderezo+=1;
+				}
+		}
+		if(cantCarne>=1 && cantAderezo>=1 &&cantPan==1) {
+			return true;
+			}
+		else {
+				return false;
+				}		
+	   }
 }
+	
+
