@@ -151,8 +151,8 @@
 	               		<c:forEach items="${combosDeUsuario}" var="combo">
 	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
 				     			<div class="card">
-				            		<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;">
-				            		<div class="card-body">
+									<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;">
+									<div class="card-body">
 					              		<h4 class="card-title">
 					                		${combo.descripcion}
 					              		</h4>
@@ -183,8 +183,10 @@
 	               		<c:forEach items="${pedidosDeUsuario}" var="pedido">
 	               			<div class="col-lg-4 col-md-2 col-sm-6 portfolio-item">
 				     			<div class="card">
-				            		<img class="" src="images/pedidoCombos.png" alt="" style="width: 30%;">
-				            		<div class="card-body">
+									<a onclick="verPedidoUsuario(${pedido.idPedido})">
+										<img class="" src="images/pedidoCombos.png" alt="" style="width: 30%;">
+									</a>
+									<div class="card-body">
 					              		<h4 class="card-title">
 					                		Pedido: Nº ${pedido.idPedido}
 					              		</h4>

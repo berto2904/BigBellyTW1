@@ -95,3 +95,29 @@ function confirmarPedido(){
 	    
 	});
 }
+
+function verPedidoUsuario(id){
+	$.confirm({
+		icon: 'fa fa-spinner fa-spin',
+		type:'dark',
+		title: '',
+		columnClass: 'xlarge',
+		buttons:{
+			Cerrar: function(){
+				location.reload();
+			},
+		},
+		content: function(){
+	        var self = this;
+	        return $.ajax({
+	            url: '/bbtw1/visualizar-pedido?pedido='+id,
+	            method: 'GET'
+	        }).done(function (response) {
+	            self.setContentAppend(response);
+	        }).fail(function(){
+	            self.setContentAppend('<div>Fail!</div>');
+	        });
+	    }
+	    
+	});
+}

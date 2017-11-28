@@ -70,7 +70,7 @@ public class ControladorCocinero {
 	@RequestMapping(path = "/procesar-pedido-pendCoccion", method = RequestMethod.POST)
 	public ModelAndView procesarPendienteDeEntrega(@RequestParam("pedido") Long idPedido) {
 		servicioPedido.actualizarEstadoPedidoAPendEntrega(idPedido);
-		return new ModelAndView("homeCocinero");
+		return new ModelAndView("redirect:/home-cocinero");
 	}
 	
 	@RequestMapping(path = "/visualizar-pedido", method = RequestMethod.GET)
