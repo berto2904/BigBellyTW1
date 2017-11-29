@@ -78,12 +78,35 @@ public class ControladorCliente {
 		return new ModelAndView("homeCliente", modelo);
 	}
 	
+	
+//	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
+//	public ModelAndView crearCombo(
+//			@RequestParam("pan") Long idPan,
+//			@RequestParam("carne") Long idCarne,
+//			@RequestParam("vegetales") Long idVegetal,
+//			@RequestParam("aderezo") Long idAderezo,
+//			HttpServletRequest request) {
+//		
+//		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
+//		ModelMap modelo = new ModelMap();
+//		Set<Ingrediente> ingredientes = new HashSet<>();
+//		ArrayList<Long> idsIngredientes = new ArrayList<Long>();
+//		
+//		idsIngredientes.add(idPan);
+//		idsIngredientes.add(idCarne);
+//		idsIngredientes.add(idVegetal);
+//		idsIngredientes.add(idAderezo);
+//		for (Long id : idsIngredientes) {
+//			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
+//			ingredientes.add(ingrediente);
+//		}
+	
 	@RequestMapping(path = "/agregarCombo", method=RequestMethod.POST)
 	public ModelAndView crearCombo(
 			@RequestParam("pan") Long idPan,
 			@RequestParam("carne") Long idCarne,
-			@RequestParam("vegetales") Long idVegetal,
-			@RequestParam("aderezo") Long idAderezo,
+			@RequestParam("vegetales[]") Long[] idVegetales,
+			@RequestParam("aderezo[]") Long[] idAderezos,
 			HttpServletRequest request) {
 		
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
@@ -93,8 +116,14 @@ public class ControladorCliente {
 		
 		idsIngredientes.add(idPan);
 		idsIngredientes.add(idCarne);
-		idsIngredientes.add(idVegetal);
-		idsIngredientes.add(idAderezo);
+		for (Long vegetal : idVegetales) {
+			idsIngredientes.add(vegetal);
+		}
+		for (Long aderezo : idAderezos) {
+			idsIngredientes.add(aderezo);		
+		}
+//		idsIngredientes.addAll(idVegetal);
+//		idsIngredientes.addAll(idAderezo);
 		for (Long id : idsIngredientes) {
 			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
 			ingredientes.add(ingrediente);
