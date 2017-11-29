@@ -39,7 +39,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav main-nav  clear navbar-right ">
                             <li><a class="navactive color_animation" href="#ingrediente">ABM Ingredientes</a></li>
-                            <li><a class="navactive color_animation" href="#combos">ABM Combos</a></li>
+                            <li><a class="navactive color_animation" href="#combo">ABM Combos</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>

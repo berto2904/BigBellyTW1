@@ -61,7 +61,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	
 	@Override
-	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) {
+	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) throws Exception {
 		Combo combo = new Combo();
 		combo.setUsuarioCreador(usuario);
 		combo.setActivo(validarCombo(ingredientes));
@@ -141,7 +141,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	//NUEVO
 	@Override
-	public Combo guardarComboAdmin(Set<Ingrediente> listaIngredientes, Usuario usuario) {
+	public Combo guardarComboAdmin(Set<Ingrediente> listaIngredientes, Usuario usuario) throws Exception {
 		Combo combo = new Combo();
 		combo.setUsuarioCreador(usuario);
 		combo.setActivo(validarComboAdmin(listaIngredientes));

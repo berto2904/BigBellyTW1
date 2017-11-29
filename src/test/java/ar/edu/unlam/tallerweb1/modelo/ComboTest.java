@@ -19,7 +19,7 @@ import ar.edu.unlam.tallerweb1.dao.ComboDao;
 public class ComboTest {	
 		
 		@Test
-		public void queUnComboTengaAlMenosTresOMasIngredientes() {
+		public void queUnComboTengaAlMenosTresOMasIngredientes() throws Exception {
 			
 			Combo c1 = new Combo();
 			Integer cantidad=0;
@@ -57,7 +57,7 @@ public class ComboTest {
 		
 		@SuppressWarnings("null")
 		@Test
-		public void queUnComboTengaStockDeTodosSusIngredientes() {
+		public void queUnComboTengaStockDeTodosSusIngredientes() throws Exception {
 			
 			ComboDao comboDao = null;
 			Ingrediente i1 = new Ingrediente();
@@ -98,7 +98,7 @@ public class ComboTest {
 		
 		
 		@Test
-		public void queUnComboNoTengaStockDeAlgunoDeSusIngredientes() {
+		public void queUnComboNoTengaStockDeAlgunoDeSusIngredientes() throws Exception {
 			
 			ComboDao comboDao = null;
 			

@@ -85,8 +85,13 @@ public class ControladorAdministrador {
 	
 	@RequestMapping(path = "/agregarIngrediente", method = RequestMethod.POST)
 	public ModelAndView persistirIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, HttpServletRequest request) {
+//		Categoria cat = new Categoria();
+//		ingrediente.setCategoria(cat);
+//		Categoria categoriaBuscada = servicioAdmnComponentes.consultarCategoria(cat);
+//		request.getSession().setAttribute("categoria", categoriaBuscada.getDescripcion());
 		
-		Ingrediente i = new Ingrediente(ingrediente.getIdIngrediente(), ingrediente.getNombre(),ingrediente.getStock(),ingrediente.getPrecio(), ingrediente.getCategoria());
+		Ingrediente i = new Ingrediente(ingrediente.getIdIngrediente(), ingrediente.getNombre(),ingrediente.getStock(),ingrediente.getPrecio(),ingrediente.getCategoria());
+		//request.getSession().setAttribute("categoria", cat.getDescripcion());
 		servicioAdmnComponentes.guardarIngrediente(i);
 		return new ModelAndView("redirect:/administrador#ingrediente");
 	}
@@ -109,7 +114,7 @@ public class ControladorAdministrador {
 			@RequestParam("carne") Long idCarne,
 			@RequestParam("vegetales") Long idVegetal,
 			@RequestParam("aderezo") Long idAderezo,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws Exception {
 		
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
 		ModelMap modelo = new ModelMap();
@@ -132,25 +137,6 @@ public class ControladorAdministrador {
 		return new ModelAndView("home",modelo);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

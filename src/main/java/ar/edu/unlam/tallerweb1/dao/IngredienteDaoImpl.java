@@ -86,16 +86,20 @@ public class IngredienteDaoImpl implements IngredienteDao {
 		return vegetales;
 	}
 	
+//	@Override
+//	public void guardarStockIngrediente(Long idIngrediente, long stockActual)  
+//	 {		
+//			Ingrediente ingrediente = consultarIngredienteById(idIngrediente);
+//			ingrediente.setStock(stockActual);
+//			final Session session = sessionFactory.getCurrentSession();
+//			session.saveOrUpdate(ingrediente);	
+//	     } 
+
+	
 	@Override
-	public void guardarStockIngrediente(Long idIngrediente, long stockActual) {
-		Ingrediente ingrediente = consultarIngredienteById(idIngrediente);
-		ingrediente.setStock(stockActual);
+	public void persisitIngrediente(Ingrediente ingrediente, Categoria categoria) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(ingrediente);
-	}
-	@Override
-	public void persisitIngrediente(Ingrediente ingrediente) {
-		final Session session = sessionFactory.getCurrentSession();
+		ingrediente.setCategoria(categoria);
 		session.saveOrUpdate(ingrediente);
 	}
 	@Override
@@ -183,4 +187,10 @@ public class IngredienteDaoImpl implements IngredienteDao {
 	}
 	
 	
+	
+	@Override
+	public void guardarCategoria(Categoria categoria) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(categoria);
+	}
 }

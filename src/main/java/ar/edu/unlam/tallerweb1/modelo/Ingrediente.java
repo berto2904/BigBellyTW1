@@ -28,7 +28,7 @@ public class Ingrediente {
 	private Long stock;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCategoria")
-	private Categoria categoria;
+	private Categoria categoria;  
 	private Boolean activo;
 	@ManyToMany(fetch = FetchType.EAGER)
 //	, cascade = { CascadeType.ALL }
@@ -69,16 +69,19 @@ public class Ingrediente {
 		return precio;
 	}
 
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	public void setPrecio(Double precio) throws Exception {
+		if(precio!=null && precio>0) {
+		this.precio = precio;}else {throw new Exception();}
 	}
+
 
 	public Long getTiempoCoccion() {
 		return tiempoCoccion;
 	}
 
-	public void setTiempoCoccion(Long tiempoCoccion) {
-		this.tiempoCoccion = tiempoCoccion;
+	public void setTiempoCoccion(Long tiempoCoccion) throws Exception {
+		if(tiempoCoccion!=null && tiempoCoccion>=0) {
+		this.tiempoCoccion = tiempoCoccion;}else {throw new Exception();}
 	}
 
 	public Categoria getCategoria() {
@@ -90,6 +93,7 @@ public class Ingrediente {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
 
 	public Set<Combo> getCombos() {
 		return combos;
@@ -103,8 +107,9 @@ public class Ingrediente {
 		return stock;
 	}
 
-	public void setStock(Long stock) {
-		this.stock = stock;
+	public void setStock(Long stock) throws Exception {
+		if(stock!=null ) {
+		this.stock = stock;}else {throw new Exception();}
 	}
 
 	public Boolean getActivo() {

@@ -14,8 +14,8 @@ public interface IngredienteDao {
 	List<Ingrediente> listarCarnesActivos();
 	List<Ingrediente> listarAderezosActivos();
 	List<Ingrediente> listarVegetalesActivos();
-	void guardarStockIngrediente(Long idIngrediente, long stockActual);
-	void persisitIngrediente(Ingrediente ingrediente);
+//	void guardarStockIngrediente(Long idIngrediente, long stockActual) throws Exception;
+	void persisitIngrediente(Ingrediente ingrediente, Categoria categoria);
 	void persisirListaIngrediente(Set<Ingrediente> ingredientes);
 	
 	//TODO
@@ -29,6 +29,7 @@ public interface IngredienteDao {
 	Ingrediente consultarIngredienteByNombre(String nombreIngrediente);
 	Set<Ingrediente> listarIngredientePersistidos();
 	List<Categoria> listarCategoria();
+	void guardarCategoria(Categoria categoria);
 	
 	
 //	List<Ingrediente> listarIngrediente();
