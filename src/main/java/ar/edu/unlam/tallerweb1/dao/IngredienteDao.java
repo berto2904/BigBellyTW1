@@ -10,8 +10,8 @@ import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
 public interface IngredienteDao {
 	
 	Ingrediente consultarIngredienteById(Long idIngrediente);
-	void guardarStockIngrediente(Long idIngrediente, long stockActual);
-	void persisitIngrediente(Ingrediente ingrediente);
+//	void guardarStockIngrediente(Long idIngrediente, long stockActual) throws Exception;
+	void persisitIngrediente(Ingrediente ingrediente, Categoria categoria);
 	void persisirListaIngrediente(Set<Ingrediente> ingredientes);
 	
 	List<Ingrediente> listarIngrediente();
@@ -24,5 +24,6 @@ public interface IngredienteDao {
 	Set<Ingrediente> listarIngredientePersistidos();
 	List<Categoria> listarCategoria();
 	List<Ingrediente> listarIngredientesActivosConStockByCategoria(String categoria);
+	void guardarCategoria(Categoria categoria);
 	
 }

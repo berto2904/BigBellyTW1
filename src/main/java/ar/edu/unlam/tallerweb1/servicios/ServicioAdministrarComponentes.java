@@ -17,6 +17,6 @@ public interface ServicioAdministrarComponentes {
 	public Ingrediente guardarIngrediente(Ingrediente i);
 	public Ingrediente eliminarIngrediente(Long id);
 	public List<Categoria> listarcategorias();
-	
+
 	
 }

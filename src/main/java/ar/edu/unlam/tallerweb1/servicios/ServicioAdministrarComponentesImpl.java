@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import ar.edu.unlam.tallerweb1.dao.CategoriaDao;
 import ar.edu.unlam.tallerweb1.dao.IngredienteDao;
 import ar.edu.unlam.tallerweb1.dao.PanDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
@@ -30,6 +32,9 @@ public class ServicioAdministrarComponentesImpl implements ServicioAdministrarCo
 	
 	@Inject
 	private IngredienteDao ingredienteDao;
+	
+	@Inject
+	private CategoriaDao categoriaDao;
 	
 //-----------------Pan----------------//
 	@Override
@@ -82,6 +87,7 @@ public class ServicioAdministrarComponentesImpl implements ServicioAdministrarCo
 			if(ingrediente.getStock()>0) {ingrediente.setActivo(true);}else{ingrediente.setActivo(false);}
 			ingrediente.setCategoria(ingrediente.getCategoria());
 			ingredienteDao.guardarIngrediente(ingrediente);
+			categoriaDao.guardarCategoria(ingrediente.getCategoria());
 			return ingrediente;
 			
 		} catch (Exception e) {
@@ -95,5 +101,7 @@ public class ServicioAdministrarComponentesImpl implements ServicioAdministrarCo
 		ingredienteDao.eliminarIngrediente(ingrediente);
 		return ingrediente;
 	}
+	
+	
 	
 }

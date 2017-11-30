@@ -27,10 +27,21 @@ public class CategoriaDaoImpl implements CategoriaDao {
 		return categoria1;
 	}
 
-//	@Override
-//	public void  persistirCategoria(Categoria categoria) {
-//		final Session session = sessionFactory.getCurrentSession();
-//		session.saveOrUpdate(categoria);
-//		
-//	}
+	
+	
+	@Override
+	public void guardarCategoria(Categoria categoria) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(categoria);
+	}
+	
+	@Override
+	public Categoria consultarCategoriaById(Long idCategoria) {
+	final Session session = sessionFactory.getCurrentSession();
+	return (Categoria) session.createCriteria(Categoria.class)
+		.add(Restrictions.eq("idCategoria", idCategoria))
+		.uniqueResult();
+		}	
+	
+	
 }

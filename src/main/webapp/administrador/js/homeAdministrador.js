@@ -61,7 +61,6 @@ function eliminarIngrediente(id){
 
 
 
-
 function editarCombo(id){
 	var nombre = $('#idCombo_'+id)["0"].cells["0"].innerText;
 	var precio = $('#idCombo_'+id)["0"].cells["2"].innerText;
