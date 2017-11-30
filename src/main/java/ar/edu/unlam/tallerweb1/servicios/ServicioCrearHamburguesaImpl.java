@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,7 +63,7 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	}
 	
 	@Override
-	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) throws Exception {
+	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) throws Exception  {
 		Combo combo = new Combo();
 		combo.setUsuarioCreador(usuario);
 		combo.setActivo(validarCombo(ingredientes));
@@ -105,15 +107,24 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 				}		
 	}
 	
+	
 	@Override
-	public Double precioCostoCombo(Set<Ingrediente> ingredientes) {		
+	public Double precioCostoCombo(Set<Ingrediente> ingredientes) throws Exception  {		
+		
 		Double costoCombo=0.0;
 		for (Ingrediente ingrediente : ingredientes) {
+			if(ingrediente.getPrecio()!=0&&ingrediente.getPrecio()>0) {
 			Double costoIngrediente = ingrediente.getPrecio();
-			costoCombo=costoCombo+costoIngrediente;			
+			costoCombo=costoCombo+costoIngrediente;
+			return costoCombo;
+			}		
+		else{throw new Exception();}
+		
 		}
 		return costoCombo;
-	}
+		
+		}
+	
 	
 	@Override
 	public Double precioFinalCombo(Double costoCombo) {

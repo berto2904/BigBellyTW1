@@ -39,12 +39,13 @@ public class Ingrediente {
     )
     private Set<Combo> combos = new HashSet<>();
 	
-	public Ingrediente(Long idIngrediente, String nombre, Long stock, Double precio, Categoria categoria) {
+	public Ingrediente(Long idIngrediente, String nombre, Long stock,Long tiempoCoccion, Double precio, Categoria categoria) {
 		this.idIngrediente=idIngrediente;
 		this.nombre=nombre;
 		this.stock=stock;
 		this.precio=precio;
 		this.categoria=categoria;
+		this.tiempoCoccion=tiempoCoccion;
 	}
 
 	public Ingrediente() {}
@@ -73,15 +74,17 @@ public class Ingrediente {
 		if(precio!=null && precio>0) {
 		this.precio = precio;}else {throw new Exception();}
 	}
+	
 
 
-	public Long getTiempoCoccion() {
+	public Long getTiempoCoccion()  {
 		return tiempoCoccion;
 	}
 
-	public void setTiempoCoccion(Long tiempoCoccion) throws Exception {
-		if(tiempoCoccion!=null && tiempoCoccion>=0) {
-		this.tiempoCoccion = tiempoCoccion;}else {throw new Exception();}
+	public void setTiempoCoccion(Long tiempoCoccion) throws Exception{
+	if(tiempoCoccion!=null && tiempoCoccion>0) 	
+	{
+		this.tiempoCoccion = tiempoCoccion;} else {throw new Exception();}
 	}
 
 	public Categoria getCategoria() {
@@ -107,9 +110,9 @@ public class Ingrediente {
 		return stock;
 	}
 
-	public void setStock(Long stock) throws Exception {
-		if(stock!=null ) {
-		this.stock = stock;}else {throw new Exception();}
+	public void setStock(Long stock) throws Exception{
+		if(stock!=null && stock>0) {
+		this.stock = stock;} else {throw new Exception();}
 	}
 
 	public Boolean getActivo() {

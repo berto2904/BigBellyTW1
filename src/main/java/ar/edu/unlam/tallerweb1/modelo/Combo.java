@@ -66,7 +66,10 @@ public class Combo {
 	public Double getPrecioFinal() {
 		return precioFinal;
 	}
-	public void setPrecioFinal(Double precioFinal) {
+	
+	
+	public void setPrecioFinal(Double precioFinal)throws Exception {
+		if(precioFinal!=null && precioFinal>0)
 		this.precioFinal = precioFinal;
 	}
 	public Set<Ingrediente> getIngredientes() {

@@ -2,43 +2,35 @@ $(document).ready(function(){
 	
 });
 
-//function editarPan(id){
-//	var nombre = $('#idPan_'+id)["0"].cells["0"].innerText;
-//	var stock =  $('#idPan_'+id)["0"].cells["1"].innerText;
-//	var precio = $('#idPan_'+id)["0"].cells["2"].innerText;
-//	
-//	$('#nombrePan').val(nombre);
-//	$('#stockPan').val(stock);
-//	$('#precioPan').val(precio);
-//}
-//
-//function limpiarPan(){
-//	$('#nombrePan').val("");
-//	$('#stockPan').val("");
-//	$('#precioPan').val("");
-//}
-//
-//function eliminarPan(id){
-//	$.ajax({
-//        url: "/bbtw1/eliminarPan?idPan="+id,
-//        type:"GET",
-//        success: function(e) {
-//         alert("Se ha eliminado el pan " + $('#idPan_'+id)["0"].cells["0"].innerText);
-//         $('.table').html($(e).find('.table'));
-//        }
-//      });
-//}
+function crearCategoria(idCategoria){
+	$.ajax({
+		url: "/bbtw1/agregarIngrediente",
+		type:"POST",
+		data: {
+        	id:idCategoria,
+        	descripcion:descripcion;
+        },
+		success: function(e) {
+			$('.tablaIngrediente').html($(e).find('.tablaIngrediente'));
+		}
+	});
+}
+
+
+
 
 function editarIngrediente(id){
 	var nombre = $('#idIngrediente_'+id)["0"].cells["0"].innerText;
 	var stock =  $('#idIngrediente_'+id)["0"].cells["1"].innerText;
 	var precio = $('#idIngrediente_'+id)["0"].cells["2"].innerText;
-	var categoria = $('#idIngrediente_'+id)["0"].cells["3"].innerText;
+	var tiempococcion = $('#idIngrediente_'+id)["0"].cells["3"].innerText;
+	var categoria = $('#idIngrediente_'+id)["0"].cells["4"].innerText;
 	
 	$('#nombreIngrediente').val(nombre);
 	$('#stockIngrediente').val(stock);
 	$('#precioIngrediente').val(precio);
 	$('#categoriaIngrediente').val(categoria);
+	$('#tcIngrediente').val(tiempococcion);
 }
 
 function limpiarIngrediente(){
@@ -46,6 +38,7 @@ function limpiarIngrediente(){
 	$('#stockIngrediente').val("");
 	$('#precioIngrediente').val("");
 	$('#categoriaIngrediente').val("");
+	$('#tcIngrediente').val("");
 }
 
 function eliminarIngrediente(id){

@@ -84,14 +84,8 @@ public class ControladorAdministrador {
 	}
 	
 	@RequestMapping(path = "/agregarIngrediente", method = RequestMethod.POST)
-	public ModelAndView persistirIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, HttpServletRequest request) {
-//		Categoria cat = new Categoria();
-//		ingrediente.setCategoria(cat);
-//		Categoria categoriaBuscada = servicioAdmnComponentes.consultarCategoria(cat);
-//		request.getSession().setAttribute("categoria", categoriaBuscada.getDescripcion());
-		
-		Ingrediente i = new Ingrediente(ingrediente.getIdIngrediente(), ingrediente.getNombre(),ingrediente.getStock(),ingrediente.getPrecio(),ingrediente.getCategoria());
-		//request.getSession().setAttribute("categoria", cat.getDescripcion());
+	public ModelAndView persistirIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, HttpServletRequest request) {		
+		Ingrediente i = new Ingrediente(ingrediente.getIdIngrediente(), ingrediente.getNombre(),ingrediente.getStock(),ingrediente.getTiempoCoccion(),ingrediente.getPrecio(),ingrediente.getCategoria());
 		servicioAdmnComponentes.guardarIngrediente(i);
 		return new ModelAndView("redirect:/administrador#ingrediente");
 	}

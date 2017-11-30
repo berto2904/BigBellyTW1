@@ -15,19 +15,20 @@
 			    <label>Stock</label>
 			    <form:input path="stock" id="stockIngrediente" type="number" class="form-control" min="0.00" max="20.00" placeholder="Stock"/>
 			  </div>
+			  <div class="form-group">
+			    <label>Tiempo de Coccion</label>
+			    <form:input path="tiempoCoccion" id="tcIngrediente" type="number" class="form-control" min="0.00" max="20.00" placeholder="Tiempo de Coccion"/>
+			  </div>
 			   <div class="form-group">
 			    <label>Precio</label>
 			    <form:input path="precio" id="precioIngrediente" type="number" class="form-control" min="0.00" max="20.00" step="0.01" placeholder="Precio"/>
-			  </div>
-			  <div class="form-group">
-			    <label>Categoria</label>
-								<select class="form-control" id="idCategoria">
-									<option value="0">Selecciona una opcion</option>
-									<c:forEach items="${listaCategorias}" var="categoria">
-											<option value="${categoria.idCategoria}">${categoria.descripcion}</option>
-									</c:forEach>
-								</select>
-			  </div>
+			   </div>
+			   <div class="form-group">
+					<label>Categoria</label> 
+					<form:select path="categoria.idCategoria">
+						<form:options items="${listaCategorias}" itemValue="idCategoria" itemLabel="descripcion"/>
+					</form:select>
+				</div>
 			  <button type="submit" class="btn btn-success">Guardar</button>
 			</form:form>
 	    </div>
@@ -49,8 +50,9 @@
 						<tr id="idIngrediente_${ingredientes.idIngrediente}">					
 							<td><c:out value="${ingredientes.nombre}"/></td>
 							<td><c:out value="${ingredientes.stock}"/></td>
-							<td><c:out value="${ingredientes.precio}"/></td>							
-							<td><c:out value="${ingredientes .categoria.getDescripcion()}"/></td>
+							<td><c:out value="${ingredientes.precio}"/></td>
+							<td><c:out value="${ingredientes.tiempoCoccion}"/></td>							
+							<td><c:out value="${ingredientes.categoria.getDescripcion()}"/></td>
 							<td><a class="btn btn-warning btn-sm" onclick="editarIngrediente(${ingredientes.idIngrediente})" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Editar</a></td>
 							<td><a class="btn btn-danger btn-sm" onclick="eliminarIngrediente(${ingredientes.idIngrediente})" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Eliminar</a></td>
 						</tr>

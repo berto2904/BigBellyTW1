@@ -107,7 +107,7 @@ public class ControladorCliente {
 			@RequestParam("carne") Long idCarne,
 			@RequestParam("vegetales[]") Long[] idVegetales,
 			@RequestParam("aderezo[]") Long[] idAderezos,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws Exception {
 		
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
 		ModelMap modelo = new ModelMap();

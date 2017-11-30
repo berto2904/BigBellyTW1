@@ -19,7 +19,7 @@ public interface ServicioCrearHamburguesa {
 	Combo guardarCombo(Set<Ingrediente> ingredientes, Usuario usuario) throws Exception;
 	List<Combo> listarCombos(Usuario usuario);
 	Boolean validarCombo(Set<Ingrediente> ingredientes);	
-	Double precioCostoCombo(Set<Ingrediente> ingredientes);
+	Double precioCostoCombo(Set<Ingrediente> ingredientes) throws Exception;
     //NUEVOS
 	void eliminarComboAdmin(Long id);
 	Combo guardarComboAdmin(Set<Ingrediente> listaIngredientes, Usuario usuario) throws Exception;
