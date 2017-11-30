@@ -12,65 +12,118 @@ import javax.servlet.http.HttpServletRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
+import static org.mockito.Mockito.*;
 
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
 import ar.edu.unlam.tallerweb1.dao.ComboDao;
+import ar.edu.unlam.tallerweb1.dao.ComboDaoImpl;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCrearHamburguesa;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCrearHamburguesaImpl;
 
 public class ComboTest {	
 		
-		@Test
-		public void queUnComboTengaAlMenosTresOMasIngredientes() throws Exception {
-			
-			Combo c1 = new Combo();
-			Integer cantidad=0;
-			Ingrediente i1 = new Ingrediente();
-			Ingrediente i2 = new Ingrediente();
-			Ingrediente i3 = new Ingrediente();
-			
-			i1.setNombre("pan");
-			i1.setStock((long) 10);
-			i2.setNombre("carne");
-			i2.setStock((long) 10);
-			i3.setNombre("Mayonesa");
-			i3.setStock((long) 10);
-			
-			Set<Ingrediente> c1Ingredientes = new HashSet<Ingrediente>();
-			
-			c1Ingredientes.add(i1);
-			c1Ingredientes.add(i2);
-			c1Ingredientes.add(i3);
-			
-			c1.setIngredientes(c1Ingredientes);	
-			
-			for (Ingrediente comboarray: c1Ingredientes) {cantidad = cantidad+1;}
-			Assert.assertTrue(cantidad>=3);		
-		}
+//		@Test
+//		public void queUnComboTengaLosIngredientesIndispensables() throws Exception {
+//									
+//			ComboDao comboDao = new ComboDaoImpl();
+//			
+//			Combo combo1 = new Combo();
+//			Ingrediente i1 = new Ingrediente();
+//			Ingrediente i2 = new Ingrediente();
+//			Ingrediente i3 = new Ingrediente();
+//			
+//			Categoria ca1 = new Categoria();
+//			Categoria ca2 = new Categoria();
+//			Categoria ca3 = new Categoria();
+//			
+//			
+//			ca1.setDescripcion("Pan");
+//			ca2.setDescripcion("Carne");
+//			ca3.setDescripcion("Aderezo");
+//			
+//			i1.setCategoria(ca1);
+//			i2.setCategoria(ca2);
+//			i3.setCategoria(ca3);
+//
+//			Set<Ingrediente> comboIngredientes = new HashSet<Ingrediente>();
+//			comboIngredientes.add(i1);
+//			comboIngredientes.add(i2);
+//			comboIngredientes.add(i3);
+//			combo1.setIngredientes(comboIngredientes);
+//			
+//			combo1.setActivo(comboDao.validarCombo(combo1));
+//		
+//			Assert.assertTrue(combo1.getActivo()==true);
+//			
+//		}
 		
 		@Test
-		public void queUnComboNoTengaPrecioNegativo() {
+		public void queUnComboNoTengaPrecioNegativo() throws Exception {
 			
 			Combo c1 = new Combo();
-			c1.setPrecioFinal(135.00);
-			Assert.assertTrue(c1.getPrecioFinal()>0);
+			ServicioCrearHamburguesa service = new ServicioCrearHamburguesaImpl();
+							
+			Ingrediente i1 = mock(Ingrediente.class);
+			Ingrediente i2 = mock(Ingrediente.class);
+			Ingrediente i3 = mock(Ingrediente.class);
 			
+			
+			when(i1.getPrecio()).thenReturn(10.00);
+			when(i2.getPrecio()).thenReturn(10.00);
+			when(i3.getPrecio()).thenReturn(10.00);
+			
+			Set<Ingrediente> comboIngredientes = new HashSet<Ingrediente>();
+			comboIngredientes.add(i1);
+			comboIngredientes.add(i2);
+			comboIngredientes.add(i3);
+			c1.setIngredientes(comboIngredientes);
+			
+			Double pcombo = service.precioCostoCombo(comboIngredientes);
+			Assert.assertTrue(pcombo>0);			
 		}
+		
+		
+//		@Test (expected=Exception.class)
+//		public void queUnComboConPrecioNegativoDeError() throws Exception{
+//			
+//			Combo c1 = new Combo();
+//			ServicioCrearHamburguesa service = new ServicioCrearHamburguesaImpl();
+//							
+//			Ingrediente i1 = mock(Ingrediente.class);
+//			Ingrediente i2 = mock(Ingrediente.class);
+//			Ingrediente i3 = mock(Ingrediente.class);
+//			
+//			
+//			when(i1.getPrecio()).thenReturn(-10.00);
+//			when(i2.getPrecio()).thenReturn(-10.00);
+//			when(i3.getPrecio()).thenReturn(-10.00);
+//			
+//			Set<Ingrediente> comboIngredientes = new HashSet<Ingrediente>();
+//			comboIngredientes.add(i1);
+//			comboIngredientes.add(i2);
+//			comboIngredientes.add(i3);
+//			c1.setIngredientes(comboIngredientes);
+//			
+//			Double pcombo = service.precioCostoCombo(comboIngredientes);	
+//			
+//			Assert.assertTrue(pcombo>0);
+//		}
+//		
 		
 		@SuppressWarnings("null")
 		@Test
 		public void queUnComboTengaStockDeTodosSusIngredientes() throws Exception {
 			
 			ComboDao comboDao = null;
-			Ingrediente i1 = new Ingrediente();
-			Ingrediente i2 = new Ingrediente();
-			Ingrediente i3 = new Ingrediente();
+
+			Ingrediente i1 = mock(Ingrediente.class);
+			Ingrediente i2 = mock(Ingrediente.class);
+			Ingrediente i3 = mock(Ingrediente.class);
 			
-			i1.setNombre("pan");
-			i1.setStock((long) 10);
-			i2.setNombre("carne");
-			i2.setStock((long) 10);
-			i3.setNombre("Mayonesa");
-			i3.setStock((long) 10);
-			
+			when(i1.getStock()).thenReturn((long) 10);
+			when(i2.getStock()).thenReturn((long) 10);
+			when(i3.getStock()).thenReturn((long) 10);
+						
 			Combo c1 = new Combo();
 			c1.setIdCombo((long) 1);
 			
@@ -92,27 +145,24 @@ public class ComboTest {
 					c1.setActivo(true);
 				}			
 			}
-			
+
 			Assert.assertTrue(c1.getActivo()==true);	
 			}
 		
 		
-		@Test
+		@Test(expected=Exception.class)
 		public void queUnComboNoTengaStockDeAlgunoDeSusIngredientes() throws Exception {
 			
 			ComboDao comboDao = null;
+
+			Ingrediente i1 = mock(Ingrediente.class);
+			Ingrediente i2 = mock(Ingrediente.class);
+			Ingrediente i3 = mock(Ingrediente.class);
 			
-			Ingrediente i1 = new Ingrediente();
-			Ingrediente i2 = new Ingrediente();
-			Ingrediente i3 = new Ingrediente();
-			
-			i1.setNombre("pan");
-			i1.setStock((long) 10);
-			i2.setNombre("carne");
-			i2.setStock((long) 0);
-			i3.setNombre("Mayonesa");
-			i3.setStock((long) 10);
-			
+			when(i1.getStock()).thenReturn((long) 10);
+			when(i2.getStock()).thenReturn((long) 0);
+			when(i3.getStock()).thenReturn((long) 10);
+						
 			Combo c1 = new Combo();
 			c1.setIdCombo((long) 1);
 			
@@ -128,34 +178,15 @@ public class ComboTest {
 				
 				if(comboArray.getStock()==0) {
 					c1.setActivo(false);
-					//comboDao.desactivarCombo(c1.getIdCombo(),false);
-
+					comboDao.desactivarCombo(c1.getIdCombo(),false);
+					
 				}else {
 					c1.setActivo(true);
 				}			
-			}			
-			Assert.assertFalse(c1.getActivo()==false);	
+			}
+
+			Assert.assertTrue(c1.getActivo()==true);	
 			}
 		
-//		@SuppressWarnings("null")
-//		@Test
-//		public void queListeLosCombosSegunElUsuario() {
-//			Rol rol = new Rol((long) 2, "Cliente");
-//			Usuario usuario = new Usuario((long) 1,"Pablo","prueba@gmail.com","password",rol);
-//			
-//			HttpServletRequest request = null;
-//			ControladorLogin cont  = new ControladorLogin();
-//			ModelAndView mav = cont.validarLogin(usuario, request);
-//			
-//			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
-//			request.getSession().setAttribute("ROL", usuario.getRol());
-//			
-//			
-//			assertThat(mav.getView()).isEqualTo("login");
-//			assertThat(mav.getModel().get("error")).isEqualTo("usuario-invalido");
-//			 
-//			List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
-//		}
 			
-		
 }
