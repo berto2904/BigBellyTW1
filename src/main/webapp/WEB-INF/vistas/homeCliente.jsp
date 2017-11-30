@@ -41,7 +41,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Restaurant Big Belly</a>
+                        <a class="navbar-brand" href="#">${usuario.nombre} ${usuario.apellido}</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->

@@ -52,7 +52,7 @@
                             <li><a class="color_animation" href="#pricing">Precios</a></li>
                             <li><a class="color_animation" href="#beer">Cerveza!</a></li>
                             <li><a class="color_animation" href="#bread">Pan!</a></li>
-                            <li><a class="color_animation" href="#contact">CONTACTO</a></li>
+                            <li><a class="color_animation" href="#reservation">Registrate</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
@@ -274,7 +274,7 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
 
         <section  id="reservation"  class="description_content">
             <div class="featured background_content">
-                <h1>Reservas!</h1>
+                <h1>Registrate!</h1>
             </div>
             <div class="text-content container"> 
                 <div class="inner contact">
