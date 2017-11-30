@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,13 +65,17 @@ public class ControladorPedido {
 	}
 	
 	@RequestMapping(path="/administrador/lista-pedidos-fecha/{year}/{month}/{day}")
-	public ModelAndView listaPedidosPorDia(@PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day){
+	public ModelAndView listaPedidosPorDia(@PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
 		ModelMap modelo = new ModelMap();
-		List<Pedido> listaPedidos = servicioPedido.listarPedidosPorFecha(year, month, day);
+		List<Pedido> listaPedidos;
+		listaPedidos = servicioPedido.listarPedidosPorFecha(year, month, day);
 		modelo.put("day", day);
 		modelo.put("month", month);
 		modelo.put("year", year);
 		modelo.put("listaPedidosFecha", listaPedidos);
 		return new ModelAndView("administrador-lista-pedidos-fecha", modelo);
+
+
+
 	}
 }

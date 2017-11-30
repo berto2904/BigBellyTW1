@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.EstadoPedido;
@@ -12,5 +13,6 @@ public interface PedidoDao {
 	public void guardarPedido(Pedido pedido);
 	public List<Pedido> listarPedidosByUsuario(Usuario usuario);
 	public List<Pedido> listarPedidosByEstado(EstadoPedido estado);
+	List<Pedido> listarPedidoPorFecha(Date fechaInicio, Date fechaFin);
 
 }

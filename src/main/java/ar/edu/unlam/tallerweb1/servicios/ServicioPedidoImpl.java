@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -116,7 +117,16 @@ public class ServicioPedidoImpl implements ServicioPedido {
 	}
 	@Override
 	public List<Pedido> listarPedidosPorFecha(Integer year, Integer month, Integer day) {
-		//TODO
-		return null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			Date fechaInicio = sdf.parse(year+"-"+month+"-"+day+" 00:00:00");
+			Date fechaFin = sdf.parse(year+"-"+month+"-"+day+" 23:59:59");
+			List<Pedido> pedidos = pedidoDao.listarPedidoPorFecha(fechaInicio,fechaFin);
+			return pedidos;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

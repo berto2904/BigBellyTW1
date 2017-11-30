@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,5 +62,19 @@ public class PedidoDaoImpl implements PedidoDao {
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 				.list();
 		return pedidos;
+	}
+	
+	@Override
+	public List<Pedido> listarPedidoPorFecha(Date fechaInicio, Date fechaFin){
+		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Pedido> pedidos = session.createCriteria(Pedido.class)
+				.add(Restrictions.ge("fechaHora", fechaInicio))
+				.add(Restrictions.le("fechaHora", fechaFin))
+				.addOrder(Order.asc("fechaHora"))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
+		return pedidos;
+		
 	}
 }
