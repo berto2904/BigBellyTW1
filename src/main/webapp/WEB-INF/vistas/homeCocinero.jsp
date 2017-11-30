@@ -46,6 +46,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav main-nav  clear navbar-right ">
                             <li><a class="navactive color_animation" href="#aCocinar">Pendientes de Coccion</a></li>
+                            <li><a class="color_animation" href="/bbtw1/cerrar-sesion">Cerrar Sesion</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
