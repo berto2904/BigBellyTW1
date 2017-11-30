@@ -52,54 +52,49 @@
                             <li><a class="color_animation" href="#pricing">Precios</a></li>
                             <li><a class="color_animation" href="#beer">Cerveza!</a></li>
                             <li><a class="color_animation" href="#bread">Pan!</a></li>
-                            <li><a class="color_animation" href="#login">Inicia Sesion</a></li>
-                            
                             <li><a class="color_animation" href="#contact">CONTACTO</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
-         
-        <div id="top" class="starter_container bg">
-            <div class="follow_container">
-                <div class="col-md-6 col-md-offset-3">
-                    <h2 class="top-title"> Big Belly</h2>
-                    <h2 class="white second-title">" Come rico "</h2>
-                    <hr>
-                </div>
-            </div>
-        </div>
-	<!-- ============ Login  ============= -->
 
-	<section class="description_content" id="login">
-		<div class="">
-			<h1>Inicia Sesion</h1>
-		</div>
-		<div class="text-content container">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<div class="form-group">
-						<form:form action="validar-login" method="POST"
-							modelAttribute="usuario">
-							<form:input path="email" id="email" type="email"
-								class="form-control" />
-							<form:input path="password" type="password" id="password"
-								class="form-control" />
-							<button class="btn btn-lg btn-primary btn-block" Type="Submit" />Login</button>
-						</form:form>
-						<c:if test="${not empty error}">
-							<h4>
-								<span>${error}</span>
-							</h4>
-							<br>
-						</c:if>
+	<div id="top" class="starter_container bg">
+		<div class="follow_container">
+			<div class="col-md-6 col-md-offset-3">
+				<h2 class="top-title">Big Belly</h2>
+				<h2 class="white second-title">" Come rico "</h2>
+				<hr>
+			</div>
+			<section class="" id="login">
+				<div class="text-content container">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="form-group">
+								<form:form action="validar-login" method="POST"
+									modelAttribute="usuario">
+									<form:input path="email" id="email" type="email" class="form-control" />
+									<form:input path="password" type="password" id="password"
+										class="form-control" />
+									<button class="btn btn-lg btn-success btn-block" Type="Submit" />Ingresar</button>
+								</form:form>
+								<c:if test="${not empty error}">
+									<h4>
+										<span>${error}</span>
+									</h4>
+									<br>
+									<hr class="colorgraph" />
+								</c:if>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</div>
-	</section>
-	<hr class="colorgraph"/>
+	</div>
+	<!-- ============ Login  ============= -->
+
+	
 	<!-- ============ About Us ============= -->
 
 	<section id="Nosotros" class="description_content">
@@ -286,38 +281,30 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                     <!-- Form Area -->
                     <div class="contact-form">
                         <!-- Form -->
-                        <form id="contact-us" method="post" action="reserve.php">
-                            <!-- Left Inputs -->
+                        <form:form id="contact-us" method="POST" action="crear-usuario-cliente" modelAttribute="usuarioNuevo">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-8 col-md-6 col-xs-12">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-xs-6">
-                                                <!-- Name -->
-                                                <input type="text" name="first_name" id="first_name" required="required" class="form" placeholder="Nombre" />
-                                                <input type="text" name="last_name" id="last_name" required="required" class="form" placeholder="Apellido" />
-                                                <input type="text" name="state" id="state" required="required" class="form" placeholder="Estado" />
-                                                <input type="text" name="datepicker" id="datepicker" required="required" class="form" placeholder="Fecha" />
+												<form:input path="nombre" type="text"  required="required" class="form" placeholder="Nombre"/>
+                                                <form:input path="apellido" type="text"  required="required" class="form" placeholder="Apellido"/>
+                                                <form:input path="celular" type="tel"  required="required" class="form" placeholder="Celular"/>
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-xs-6">
-                                                <!-- Name -->
-                                                <input type="text" name="phone" id="phone" required="required" class="form" placeholder="Telefono" />
-                                                <input type="text" name="guest" id="guest" required="required" class="form" placeholder="Celular" />
-                                                <input type="email" name="email" id="email" required="required" class="form" placeholder="Email" />
-                                                <input type="text" name="subject" id="subject" required="required" class="form" placeholder="Titulo" />
+                                                <form:input path="email" type="email"  required="required" class="form" placeholder="E-Mail"/>
+                                                 <form:input path="password" type="password"  required="required" class="form" placeholder="Contraseña"/>
                                             </div>
 
                                             <div class="col-xs-6 ">
-                                                <!-- Send Button -->
-                                                <button type="submit" id="submit" name="submit" class="text-center form-btn form-btn">Reservas</button> 
+												<button class="text-center form-btn form-btn" Type="Submit" id="ingresar"/>Quiero ser BigBelly</button>
                                             </div>
                                             
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-4 col-md-6 col-xs-12">
-                                        <!-- Message -->
                                         <div class="right-text">
                                             <h2>Horarios</h2><hr>
                                             <p>Lunes a Viernes: 7:30 AM - 11:30 AM</p>
@@ -329,9 +316,8 @@ Aquí, en el restaurante, nos gusta el amor por la cerveza. Sabores nuevos y auda
                                     </div>
                                 </div>
                             </div>
-                            <!-- Clear -->
                             <div class="clear"></div>
-                        </form>
+                        </form:form>
                     </div><!-- End Contact Form Area -->
                 </div><!-- End Inner -->
             </div>

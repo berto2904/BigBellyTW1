@@ -24,5 +24,6 @@ public interface ServicioCrearHamburguesa {
 	void eliminarComboAdmin(Long id);
 	Combo guardarComboAdmin(Set<Ingrediente> listaIngredientes, Usuario usuario);
 	Boolean validarComboAdmin(Set<Ingrediente> ingredientes);
+	void eliminarComboCreacionPedido(Long idCombo);
 
 }

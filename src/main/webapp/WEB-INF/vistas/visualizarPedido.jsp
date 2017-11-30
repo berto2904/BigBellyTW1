@@ -94,8 +94,9 @@
 					<div class="card">
 						<img src="images/perfil.png" alt="Avatar" style="width: 55%">
 						<div class="">
-							<h4><b>${pedido.usuario.getNombre()}</b></h4>
+							<h4><b>${pedido.usuario.getNombre()} ${pedido.usuario.getApellido()} </b></h4>
 							<h4><b>${pedido.usuario.getEmail()}</b></h4>
+							<h4><b>${pedido.usuario.getCelular()}</b></h4>
 						</div>
 					</div>
 				</div>

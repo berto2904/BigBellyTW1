@@ -121,3 +121,29 @@ function verPedidoUsuario(id){
 	    
 	});
 }
+function eliminarCombo(idCombo){
+	$.confirm({
+		content:'Estas seguro de eliminar el combo?',
+		icon: 'fa fa-spinner fa-spin',
+		type:'dark',
+		title: '',
+		columnClass: 'small',
+		buttons:{
+			Aceptar: function(){
+				$.ajax({
+			        url: "/bbtw1/eliminar-combo-creacion",
+			        type:"POST",
+			        data: {
+			        	idCombo:idCombo,
+			        },
+			        success: function(e) {
+			        	location.reload();
+			        }
+				});
+			},
+			Cancelar: function(){
+				location.reload();
+			},
+		}	    
+	});
+}

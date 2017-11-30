@@ -186,6 +186,11 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 				return false;
 				}		
 	   }
+	@Override
+	public void eliminarComboCreacionPedido(Long idCombo) {
+		Combo combo = comboDao.consultaComboById(idCombo);
+		comboDao.eliminarCombo(combo);
+	}
 }
 	
 

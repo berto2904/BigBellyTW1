@@ -50,8 +50,10 @@ public class ControladorLogin {
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		Usuario usuario = new Usuario();
-		modelo.put("usuario", usuario);
+		Usuario usuarioLogin = new Usuario();
+		Usuario clienteNuevo = new Usuario();
+		modelo.put("usuario", usuarioLogin);
+		modelo.put("usuarioNuevo", clienteNuevo);
 		return new ModelAndView("home", modelo);
 	}
 	
@@ -73,7 +75,7 @@ public class ControladorLogin {
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}
-		return new ModelAndView("redirect:/home#login", model);
+		return new ModelAndView("redirect:/home", model);
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -85,5 +87,12 @@ public class ControladorLogin {
 	public ModelAndView invalidate(HttpServletRequest request) {
 		request.getSession().invalidate();
 	  return new ModelAndView("redirect:/home");
+	}
+	
+	@RequestMapping(path = "/crear-usuario-cliente", method=RequestMethod.POST)
+	public ModelAndView crearUsuarioCliente(@ModelAttribute("usuarioNuevo") Usuario usuario, HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		servicioLogin.crearCliente(usuario);
+		return new ModelAndView("redirect:/home",modelo);
 	}
 }

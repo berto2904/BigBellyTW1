@@ -153,6 +153,9 @@
 	               			<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
 				     			<div class="card">
 									<img class="" src="images/combo-portfolio.png" alt="" style="width: 30%;">
+									<button type="button" class="close" aria-label="Close" onclick="eliminarCombo(${combo.idCombo})">
+										<span aria-hidden="true">&times;</span>
+									</button>
 									<div class="card-body">
 					              		<h4 class="card-title">
 					                		${combo.descripcion}

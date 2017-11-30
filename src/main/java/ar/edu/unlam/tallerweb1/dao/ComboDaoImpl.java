@@ -70,4 +70,11 @@ public class ComboDaoImpl implements ComboDao {
 		}
 	}
 	
+	@Override
+	public void eliminarCombo(Combo combo) {
+		final Session session = sessionFactory.getCurrentSession();
+		combo.setActivo(false);
+		session.saveOrUpdate(combo);
+	}
+	
 }

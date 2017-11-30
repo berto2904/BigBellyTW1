@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.dao.RolDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.modelo.EstadoPedido;
+import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 // Implelemtacion del Servicio de usuarios, la anotacion @Service indica a Spring que esta clase es un componente que debe
@@ -20,7 +23,10 @@ public class ServicioLoginImpl implements ServicioLogin {
 
 	@Inject
 	private UsuarioDao servicioLoginDao;
-
+	
+	@Inject
+	private RolDao rolDao;
+	
 	@Inject
 	private UsuarioDao usuarioDao;
 	
@@ -37,5 +43,11 @@ public class ServicioLoginImpl implements ServicioLogin {
 	public void actualizarUsuario(Usuario usuario) {
 		usuarioDao.guardarUsuario(usuario);
 		
+	}
+	@Override
+	public void crearCliente(Usuario usuario) {
+		Rol rol = rolDao.consultarRolPorId((long) 2);
+		usuario.setRol(rol);
+		usuarioDao.guardarUsuario(usuario);
 	}
 }

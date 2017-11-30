@@ -15,6 +15,7 @@ public interface ComboDao {
 	Combo consultaComboById(Long id);
 	List<Combo> listarCombosByUsuarioTrue(Usuario usuario);
 	void persistirListaCombo(List<Combo> combos);
+	void eliminarCombo(Combo combo);
 	
 	
 	

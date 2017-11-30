@@ -122,8 +122,6 @@ public class ControladorCliente {
 		for (Long aderezo : idAderezos) {
 			idsIngredientes.add(aderezo);		
 		}
-//		idsIngredientes.addAll(idVegetal);
-//		idsIngredientes.addAll(idAderezo);
 		for (Long id : idsIngredientes) {
 			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
 			ingredientes.add(ingrediente);
@@ -135,6 +133,7 @@ public class ControladorCliente {
 
 		return new ModelAndView("homeCliente",modelo);
 	}
+	
 	@RequestMapping(path="/confirmar-pedido-cliente")
 	public ModelAndView confirmarPedido(HttpServletRequest request) {
 		Usuario usuario = servicioLogin.consultarUsuarioById((Long) request.getSession().getAttribute("idUsuario"));
@@ -143,8 +142,6 @@ public class ControladorCliente {
 		modelo.put("combosDeUsuario", listaCombos);
 		return new ModelAndView("confirmarPedido",modelo);
 	}
-		
-		
 		
 	@RequestMapping(path="/crear-pedido-cliente")
 	public ModelAndView crearPedido(@RequestParam("direccion") String direccionUsuario,HttpServletRequest request) {
@@ -155,6 +152,13 @@ public class ControladorCliente {
 		List<Pedido> listaPedidos = servicioPedido.listarPedidosByUsuario(usuario);
 		modelo.put("pedidosDeUsuario", listaPedidos);
 		return new ModelAndView("homeCliente",modelo);
-		
 	}
+	
+	@RequestMapping(path = "/eliminar-combo-creacion", method=RequestMethod.POST)
+	public ModelAndView crearCombo(@RequestParam("idCombo") Long idCombo, HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		servicioCrearHamburguesa.eliminarComboCreacionPedido(idCombo);
+		return new ModelAndView("redirect:/home-cliente",modelo);
+	}
+	
 }
