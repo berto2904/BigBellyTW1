@@ -39,32 +39,39 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 	@Inject
 	private UsuarioDao usuarioDao;
 	
+	
 	@Override
 	public List<Ingrediente> listarPanes() {
-		List<Ingrediente> panes = ingredienteDao.listarPanesActivos();
+		List<Ingrediente> panes = ingredienteDao.listarIngredientesActivosConStockByCategoria("pan");
 		return panes;
 	}
 	@Override
 	public List<Ingrediente> listarCarnes() {
-		List<Ingrediente> carnes = ingredienteDao.listarCarnesActivos();
+		List<Ingrediente> carnes = ingredienteDao.listarIngredientesActivosConStockByCategoria("carne");
 		return carnes;
 	}
+	
 	@Override
 	public List<Ingrediente> listarAderezos() {
-		List<Ingrediente> aderezos = ingredienteDao.listarAderezosActivos();
+		List<Ingrediente> aderezos = ingredienteDao.listarIngredientesActivosConStockByCategoria("aderezo");
 		return aderezos;
 	}
 	@Override
 	public List<Ingrediente> listarVegetales() {
-		List<Ingrediente> vegetales = ingredienteDao.listarVegetalesActivos();
+		List<Ingrediente> vegetales = ingredienteDao.listarIngredientesActivosConStockByCategoria("vegetales");
 		return vegetales;
 	}
 	
 	@Override
-	public Combo guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) {
+	public String guardarCombo(Set<Ingrediente> ingredientes,Usuario usuario) {
 		Combo combo = new Combo();
+		String mensaje = "";
 		combo.setUsuarioCreador(usuario);
 		combo.setActivo(validarCombo(ingredientes));
+		if (combo.getActivo().equals(false)) {
+			mensaje = "Para crear tu combo, al menos Pan, Carne y aderezo son necesarios";
+			return mensaje;
+		}
 		combo.setDescripcion("Creado por  "+ usuario.getNombre());
 		combo.setPrecioFinal(precioFinalCombo(precioCostoCombo(ingredientes)));
 		for (Ingrediente ingrediente : ingredientes) {
@@ -75,7 +82,8 @@ public class ServicioCrearHamburguesaImpl implements ServicioCrearHamburguesa {
 		}
 		ingredienteDao.persisirListaIngrediente(ingredientes);
 		comboDao.guardarCombo(combo);
-		return combo;
+		mensaje = "Se ha creado tu combo";
+		return mensaje;
 	}
 	
 	@Override

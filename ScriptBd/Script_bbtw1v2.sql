@@ -10,6 +10,8 @@ select * from combo_pedido;
 select *from pedido;
 select * from ingrediente ;
 
+select *from usuario;
+
 insert into estadopedido(descripcion)
     values  ("En proceso de preparacion"),
             ("En proceso de entrega"),

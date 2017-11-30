@@ -16,7 +16,7 @@ public interface ServicioCrearHamburguesa {
 	List<Ingrediente> listarVegetales();
 	
 	Double precioFinalCombo(Double costoCombo);
-	Combo guardarCombo(Set<Ingrediente> ingredientes, Usuario usuario);
+	String guardarCombo(Set<Ingrediente> ingredientes, Usuario usuario);
 	List<Combo> listarCombos(Usuario usuario);
 	Boolean validarCombo(Set<Ingrediente> ingredientes);	
 	Double precioCostoCombo(Set<Ingrediente> ingredientes);

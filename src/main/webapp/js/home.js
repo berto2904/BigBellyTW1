@@ -26,7 +26,7 @@ function crearCombo(){
         	vegetales:idVegetales
         },
         success: function(e) {
-        	alert("Tu combo se ha creado con exito!!");
+        	$.alert($(e).filter('.mensaje').val());
         	$('.combosCreados').html($(e).find('.combosCreados'));
         	sumarCombos();
         }

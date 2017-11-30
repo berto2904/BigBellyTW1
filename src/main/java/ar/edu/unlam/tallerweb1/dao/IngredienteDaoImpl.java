@@ -33,57 +33,19 @@ public class IngredienteDaoImpl implements IngredienteDao {
 			return null;
 		}
 	}
-	
+
 	@Override
-	public List<Ingrediente> listarPanesActivos() {
+	public List<Ingrediente> listarIngredientesActivosConStockByCategoria(String categoria) {
 		final Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Ingrediente> panes = session.createCriteria(Ingrediente.class)
+		List<Ingrediente> ingredientes = session.createCriteria(Ingrediente.class)
 			.add(Restrictions.eq("activo", true))
 			.createAlias("categoria", "cat")
-			.add(Restrictions.eq("cat.descripcion","pan"))
+			.add(Restrictions.eq("cat.descripcion",categoria))
+			.add(Restrictions.gt("stock", (long)0))
 			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 			.list();
-		return panes;
-	}
-	
-	@Override
-	public List<Ingrediente> listarCarnesActivos() {
-		final Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Ingrediente> carnes = session.createCriteria(Ingrediente.class)
-			.add(Restrictions.eq("activo", true))
-			.createAlias("categoria", "cat")
-			.add(Restrictions.eq("cat.descripcion","carne"))
-			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-			.list();
-		return carnes;
-	}
-	
-	@Override
-	public List<Ingrediente> listarAderezosActivos() {
-		final Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Ingrediente> aderezos = session.createCriteria(Ingrediente.class)
-			.add(Restrictions.eq("activo", true))
-			.createAlias("categoria", "cat")
-			.add(Restrictions.eq("cat.descripcion","aderezo"))
-			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-			.list();
-		return aderezos;
-	}
-	
-	@Override
-	public List<Ingrediente> listarVegetalesActivos() {
-		final Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Ingrediente> vegetales = session.createCriteria(Ingrediente.class)
-			.add(Restrictions.eq("activo", true))
-			.createAlias("categoria", "cat")
-			.add(Restrictions.eq("cat.descripcion","vegetales"))
-			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-			.list();
-		return vegetales;
+		return ingredientes;
 	}
 	
 	@Override

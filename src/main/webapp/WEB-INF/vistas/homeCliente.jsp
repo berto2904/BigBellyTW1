@@ -56,7 +56,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
-         
         <div id="top" class="starter_container bg">
             <div class="follow_container">
                 <div class="col-md-6 col-md-offset-3">
@@ -92,8 +91,7 @@
 
 
 		<!-- ============ Crear Hamburguesa  ============= -->
-
-
+        <input type="hidden" class="mensaje" value="${mensaje}"/>
         <section id="creahambur" class=" description_content">
             <div  class="custom background_content">
                 <h1>Arma tu propia <span>Hamburguesa</span></h1>
@@ -108,14 +106,14 @@
 						  <div class="form-group">
 								<label>Pan</label>
 								<select id="idPan" class="form-control">
-									<option value="0">Selecciona una opcion</option>
+									<option value="0" selected>Selecciona una opcion</option>
 									<c:forEach items="${listaPanes}" var="pan">
 											<option value="${pan.idIngrediente}">${pan.nombre}</option>
 									</c:forEach>
 								</select>
 								<label>Carne</label>
 								<select class="form-control" id="idCarne">
-									<option value="0">Selecciona una opcion</option>
+									<option value="0" selected>Selecciona una opcion</option>
 									<c:forEach items="${listaCarne}" var="carne">
 											<option value="${carne.idIngrediente}">${carne.nombre}</option>
 									</c:forEach>
@@ -123,14 +121,14 @@
 									
 								<label>Aderezos</label>
 								<select class="form-control" id="idAderezos" multiple="multiple">
-									<option value="0">Selecciona una opcion</option>
+									<option value="0" selected>Selecciona una opcion</option>
 									<c:forEach items="${listaAderezos}" var="aderezo">
 											<option value="${aderezo.idIngrediente}">${aderezo.nombre}</option>
 									</c:forEach>
 								</select>
 								<label>Vegetales</label>
 								<select class="form-control" id="idVegetales" multiple="multiple">
-									<option value="0">Selecciona una opcion</option>
+									<option value="0" selected>Selecciona una opcion</option>
 									<c:forEach items="${listaVegetales}" var="vegetal">
 											<option value="${vegetal.idIngrediente}">${vegetal.nombre}</option>
 									</c:forEach>
@@ -168,6 +166,7 @@
 										<span>
 											<h3>$ ${combo.precioFinal}</h3>
 											<input type="hidden" class="valorCombo" value="${combo.precioFinal}"/>
+											
 										</span>
 				            		</div>
 	          					</div>

@@ -123,14 +123,16 @@ public class ControladorCliente {
 			idsIngredientes.add(aderezo);		
 		}
 		for (Long id : idsIngredientes) {
-			Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
-			ingredientes.add(ingrediente);
+			if (id != 0) {
+				Ingrediente ingrediente = servicioCrearHamburguesa.consultarIngredienteById(id);
+				ingredientes.add(ingrediente);
+			}
 		}
 		
-		servicioCrearHamburguesa.guardarCombo(ingredientes,usuario);
+		String mensaje = servicioCrearHamburguesa.guardarCombo(ingredientes,usuario);
 		List<Combo> listaCombos = servicioCrearHamburguesa.listarCombos(usuario);
 		modelo.put("combosDeUsuario", listaCombos);
-
+		modelo.put("mensaje", mensaje);
 		return new ModelAndView("homeCliente",modelo);
 	}
 	
