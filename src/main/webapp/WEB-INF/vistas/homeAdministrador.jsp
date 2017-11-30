@@ -38,6 +38,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav main-nav  clear navbar-right ">
+                            <li><a class="color_animation" href="/bbtw1/administrador/lista-pedidos-entregados">Lista de pedido facturado</a></li>
                             <li><a class="navactive color_animation" href="#ingrediente">ABM Ingredientes</a></li>
                             <li><a class="navactive color_animation" href="#combos">ABM Combos</a></li>
                             <li><a class="color_animation" href="/bbtw1/cerrar-sesion">Cerrar Sesion</a></li>
